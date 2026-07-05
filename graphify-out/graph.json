@@ -1,0 +1,1369 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "page.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/announcements/page.tsx",
+      "file_type": "concept",
+      "id": "app\\announcements\\page.tsx",
+      "community": 6,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "page.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/businesses/page.tsx",
+      "file_type": "concept",
+      "id": "app\\businesses\\page.tsx",
+      "community": 7,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "page.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/contact/page.tsx",
+      "file_type": "concept",
+      "id": "app\\contact\\page.tsx",
+      "community": 8,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "page.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/faq/page.tsx",
+      "file_type": "concept",
+      "id": "app\\faq\\page.tsx",
+      "community": 9,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "page.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/groups/[slug]/page.tsx",
+      "file_type": "concept",
+      "id": "app\\groups\\[slug]\\page.tsx",
+      "community": 10,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "page.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/groups/page.tsx",
+      "file_type": "concept",
+      "id": "app\\groups\\page.tsx",
+      "community": 11,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "page.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/guidelines/page.tsx",
+      "file_type": "concept",
+      "id": "app\\guidelines\\page.tsx",
+      "community": 12,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "layout.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/layout.tsx",
+      "file_type": "concept",
+      "id": "app\\layout.tsx",
+      "community": 13,
+      "norm_label": "layout.tsx"
+    },
+    {
+      "label": "page.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/newcomers/page.tsx",
+      "file_type": "concept",
+      "id": "app\\newcomers\\page.tsx",
+      "community": 14,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "not-found.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/not-found.tsx",
+      "file_type": "concept",
+      "id": "app\\not-found.tsx",
+      "community": 15,
+      "norm_label": "not-found.tsx"
+    },
+    {
+      "label": "opengraph-image.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/opengraph-image.tsx",
+      "file_type": "concept",
+      "id": "app\\opengraph-image.tsx",
+      "community": 16,
+      "norm_label": "opengraph-image.tsx"
+    },
+    {
+      "label": "page.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/page.tsx",
+      "file_type": "concept",
+      "id": "app\\page.tsx",
+      "community": 17,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "robots.ts",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/robots.ts",
+      "file_type": "concept",
+      "id": "app\\robots.ts",
+      "community": 18,
+      "norm_label": "robots.ts"
+    },
+    {
+      "label": "page.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/safety/page.tsx",
+      "file_type": "concept",
+      "id": "app\\safety\\page.tsx",
+      "community": 19,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "sitemap.ts",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "app/sitemap.ts",
+      "file_type": "concept",
+      "id": "app\\sitemap.ts",
+      "community": 20,
+      "norm_label": "sitemap.ts"
+    },
+    {
+      "label": "BusinessCard.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "components/BusinessCard.tsx",
+      "file_type": "concept",
+      "id": "components\\BusinessCard.tsx",
+      "community": 23,
+      "norm_label": "businesscard.tsx"
+    },
+    {
+      "label": "ContactForm.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "components/ContactForm.tsx",
+      "file_type": "concept",
+      "id": "components\\ContactForm.tsx",
+      "community": 24,
+      "norm_label": "contactform.tsx"
+    },
+    {
+      "label": "CopyLinkButton.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "components/CopyLinkButton.tsx",
+      "file_type": "concept",
+      "id": "components\\CopyLinkButton.tsx",
+      "community": 25,
+      "norm_label": "copylinkbutton.tsx"
+    },
+    {
+      "label": "Footer.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "components/Footer.tsx",
+      "file_type": "concept",
+      "id": "components\\Footer.tsx",
+      "community": 26,
+      "norm_label": "footer.tsx"
+    },
+    {
+      "label": "GroupCard.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "components/GroupCard.tsx",
+      "file_type": "concept",
+      "id": "components\\GroupCard.tsx",
+      "community": 27,
+      "norm_label": "groupcard.tsx"
+    },
+    {
+      "label": "Header.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "components/Header.tsx",
+      "file_type": "concept",
+      "id": "components\\Header.tsx",
+      "community": 28,
+      "norm_label": "header.tsx"
+    },
+    {
+      "label": "JoinButton.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "components/JoinButton.tsx",
+      "file_type": "concept",
+      "id": "components\\JoinButton.tsx",
+      "community": 29,
+      "norm_label": "joinbutton.tsx"
+    },
+    {
+      "label": "JsonLd.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "components/JsonLd.tsx",
+      "file_type": "concept",
+      "id": "components\\JsonLd.tsx",
+      "community": 30,
+      "norm_label": "jsonld.tsx"
+    },
+    {
+      "label": "PageHeader.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "components/PageHeader.tsx",
+      "file_type": "concept",
+      "id": "components\\PageHeader.tsx",
+      "community": 31,
+      "norm_label": "pageheader.tsx"
+    },
+    {
+      "label": "QrCode.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "components/QrCode.tsx",
+      "file_type": "concept",
+      "id": "components\\QrCode.tsx",
+      "community": 32,
+      "norm_label": "qrcode.tsx"
+    },
+    {
+      "label": "StickyJoinBar.tsx",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "components/StickyJoinBar.tsx",
+      "file_type": "concept",
+      "id": "components\\StickyJoinBar.tsx",
+      "community": 33,
+      "norm_label": "stickyjoinbar.tsx"
+    },
+    {
+      "label": "announcements.ts",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "data/announcements.ts",
+      "file_type": "concept",
+      "id": "data\\announcements.ts",
+      "community": 34,
+      "norm_label": "announcements.ts"
+    },
+    {
+      "label": "businesses.ts",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "data/businesses.ts",
+      "file_type": "concept",
+      "id": "data\\businesses.ts",
+      "community": 35,
+      "norm_label": "businesses.ts"
+    },
+    {
+      "label": "faqs.ts",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "data/faqs.ts",
+      "file_type": "concept",
+      "id": "data\\faqs.ts",
+      "community": 36,
+      "norm_label": "faqs.ts"
+    },
+    {
+      "label": "groups.ts",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "data/groups.ts",
+      "file_type": "concept",
+      "id": "data\\groups.ts",
+      "community": 37,
+      "norm_label": "groups.ts"
+    },
+    {
+      "label": "guidelines.ts",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "data/guidelines.ts",
+      "file_type": "concept",
+      "id": "data\\guidelines.ts",
+      "community": 38,
+      "norm_label": "guidelines.ts"
+    },
+    {
+      "label": "newcomers.ts",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "data/newcomers.ts",
+      "file_type": "concept",
+      "id": "data\\newcomers.ts",
+      "community": 39,
+      "norm_label": "newcomers.ts"
+    },
+    {
+      "label": "safety.ts",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "data/safety.ts",
+      "file_type": "concept",
+      "id": "data\\safety.ts",
+      "community": 40,
+      "norm_label": "safety.ts"
+    },
+    {
+      "label": "site.ts",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "data/site.ts",
+      "file_type": "concept",
+      "id": "data\\site.ts",
+      "community": 41,
+      "norm_label": "site.ts"
+    },
+    {
+      "label": "types.ts",
+      "type": "file",
+      "confidence": 1.0,
+      "source_file": "lib/types.ts",
+      "file_type": "concept",
+      "id": "lib\\types.ts",
+      "community": 43,
+      "norm_label": "types.ts"
+    },
+    {
+      "label": "Desi GR Hub",
+      "type": "concept",
+      "source_location": "README.md, AGENTS.md",
+      "confidence": 1.0,
+      "description": "Static website and front door for Indian & South Asian community in Grand Rapids, West Michigan WhatsApp community",
+      "file_type": "concept",
+      "id": "project/desi-gr-hub",
+      "community": 1,
+      "norm_label": "desi gr hub"
+    },
+    {
+      "label": "Next.js 16",
+      "type": "framework",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Web framework with App Router for static generation",
+      "file_type": "concept",
+      "id": "tech/nextjs-16",
+      "community": 2,
+      "norm_label": "next.js 16"
+    },
+    {
+      "label": "React 19",
+      "type": "framework",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "UI library for component-based rendering",
+      "file_type": "concept",
+      "id": "tech/react-19",
+      "community": 1,
+      "norm_label": "react 19"
+    },
+    {
+      "label": "TypeScript (strict)",
+      "type": "technology",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Strict type checking for all content and components",
+      "file_type": "concept",
+      "id": "tech/typescript",
+      "community": 1,
+      "norm_label": "typescript (strict)"
+    },
+    {
+      "label": "Tailwind CSS v4",
+      "type": "framework",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "CSS framework with v4 configured in CSS via @theme in app/globals.css, no tailwind.config.js",
+      "file_type": "concept",
+      "id": "tech/tailwind-v4",
+      "community": 1,
+      "norm_label": "tailwind css v4"
+    },
+    {
+      "label": "Formspree",
+      "type": "tool",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Backend-less contact form service via @formspree/react package",
+      "file_type": "concept",
+      "id": "tech/formspree",
+      "community": 1,
+      "norm_label": "formspree"
+    },
+    {
+      "label": "qrcode package",
+      "type": "tool",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Package for generating QR codes to SVG at build time",
+      "file_type": "concept",
+      "id": "tech/qrcode",
+      "community": 4,
+      "norm_label": "qrcode package"
+    },
+    {
+      "label": "App Router",
+      "type": "pattern",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Next.js routing pattern used for all pages and dynamic routes",
+      "file_type": "concept",
+      "id": "arch/app-router",
+      "community": 2,
+      "norm_label": "app router"
+    },
+    {
+      "label": "Server Components",
+      "type": "pattern",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Default component pattern; use client only for mobile menu, copy button, and contact form",
+      "file_type": "concept",
+      "id": "arch/server-components",
+      "community": 2,
+      "norm_label": "server components"
+    },
+    {
+      "label": "Static Generation",
+      "type": "pattern",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "All pages are statically generated at build time, no runtime database or authentication",
+      "file_type": "concept",
+      "id": "arch/static-generation",
+      "community": 4,
+      "norm_label": "static generation"
+    },
+    {
+      "label": "Content as Data",
+      "type": "pattern",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "All content (groups, FAQs, announcements, businesses) lives in typed data/*.ts files, not in components",
+      "file_type": "concept",
+      "id": "arch/content-as-data",
+      "community": 0,
+      "norm_label": "content as data"
+    },
+    {
+      "label": "Vercel Deployment",
+      "type": "tool",
+      "source_location": "DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Free hosting platform for automatic builds and deployment on GitHub push",
+      "file_type": "concept",
+      "id": "deploy/vercel",
+      "community": 1,
+      "norm_label": "vercel deployment"
+    },
+    {
+      "label": "Google Search Console",
+      "type": "tool",
+      "source_location": "DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Search engine optimization and sitemap submission at yoursite.com/sitemap.xml",
+      "file_type": "concept",
+      "id": "deploy/google-search-console",
+      "community": 3,
+      "norm_label": "google search console"
+    },
+    {
+      "label": "Bing Webmaster Tools",
+      "type": "tool",
+      "source_location": "DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Search engine optimization for Bing",
+      "file_type": "concept",
+      "id": "deploy/bing-webmaster",
+      "community": 3,
+      "norm_label": "bing webmaster tools"
+    },
+    {
+      "label": "data/groups.ts",
+      "type": "concept",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "WhatsApp group definitions with name, description, join URL, guidelines",
+      "file_type": "concept",
+      "id": "data/groups",
+      "community": 3,
+      "norm_label": "data/groups.ts"
+    },
+    {
+      "label": "data/announcements.ts",
+      "type": "concept",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Community announcements with ISO dates, newest first",
+      "file_type": "concept",
+      "id": "data/announcements",
+      "community": 0,
+      "norm_label": "data/announcements.ts"
+    },
+    {
+      "label": "data/faqs.ts",
+      "type": "concept",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "FAQ entries that feed both /faq page and FAQPage JSON-LD",
+      "file_type": "concept",
+      "id": "data/faqs",
+      "community": 0,
+      "norm_label": "data/faqs.ts"
+    },
+    {
+      "label": "data/newcomers.ts",
+      "type": "concept",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Newcomer's Guide sections covering groceries, temples, banking, transportation; marked for admin review",
+      "file_type": "concept",
+      "id": "data/newcomers",
+      "community": 0,
+      "norm_label": "data/newcomers.ts"
+    },
+    {
+      "label": "data/businesses.ts",
+      "type": "concept",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Community business directory with admin-curated desi-owned businesses; requests via contact form",
+      "file_type": "concept",
+      "id": "data/businesses",
+      "community": 0,
+      "norm_label": "data/businesses.ts"
+    },
+    {
+      "label": "data/guidelines.ts",
+      "type": "concept",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Community guidelines and expectations",
+      "file_type": "concept",
+      "id": "data/guidelines",
+      "community": 0,
+      "norm_label": "data/guidelines.ts"
+    },
+    {
+      "label": "data/safety.ts",
+      "type": "concept",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Safety disclaimers and notes; must be preserved",
+      "file_type": "concept",
+      "id": "data/safety",
+      "community": 0,
+      "norm_label": "data/safety.ts"
+    },
+    {
+      "label": "data/site.ts",
+      "type": "concept",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Global settings: site URL, main hub link, Formspree ID, social metadata",
+      "file_type": "concept",
+      "id": "data/site",
+      "community": 0,
+      "norm_label": "data/site.ts"
+    },
+    {
+      "label": "lib/types.ts",
+      "type": "concept",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "TypeScript interfaces for all content data shapes",
+      "file_type": "concept",
+      "id": "lib/types",
+      "community": 0,
+      "norm_label": "lib/types.ts"
+    },
+    {
+      "label": "Mobile-first Design",
+      "type": "guideline",
+      "source_location": "README.md, AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "95% of visitors on phones; 44px+ tap targets, tested at 375px width",
+      "file_type": "concept",
+      "id": "feature/mobile-first",
+      "community": 1,
+      "norm_label": "mobile-first design"
+    },
+    {
+      "label": "WhatsApp Integration",
+      "type": "guideline",
+      "source_location": "README.md, AGENTS.md",
+      "confidence": 1.0,
+      "description": "One-tap group join links, QR codes for groups, rich WhatsApp link previews",
+      "file_type": "concept",
+      "id": "feature/whatsapp-integration",
+      "community": 1,
+      "norm_label": "whatsapp integration"
+    },
+    {
+      "label": "QR Code Generation",
+      "type": "pattern",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "SVG QR codes rendered at build time in QrCode server component",
+      "file_type": "concept",
+      "id": "feature/qr-codes",
+      "community": 4,
+      "norm_label": "qr code generation"
+    },
+    {
+      "label": "SEO Optimization",
+      "type": "guideline",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Per-page metadata, JSON-LD (Organization, WebSite, FAQPage, BreadcrumbList), sitemap.ts, robots.ts, opengraph-image",
+      "file_type": "concept",
+      "id": "feature/seo",
+      "community": 3,
+      "norm_label": "seo optimization"
+    },
+    {
+      "label": "Static Output",
+      "type": "guideline",
+      "source_location": "README.md, AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Fully static site, no database, no authentication; fast on slow connections and free to host",
+      "file_type": "concept",
+      "id": "feature/static-output",
+      "community": 42,
+      "norm_label": "static output"
+    },
+    {
+      "label": "Color Scheme",
+      "type": "guideline",
+      "source_location": "AGENTS.md, README.md",
+      "confidence": 1.0,
+      "description": "Dark theme with saffron-to-violet gradient accents; WhatsApp green reserved for join CTAs only",
+      "file_type": "concept",
+      "id": "design/color-scheme",
+      "community": 1,
+      "norm_label": "color scheme"
+    },
+    {
+      "label": "generateStaticParams",
+      "type": "pattern",
+      "source_location": "DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Next.js pattern for pre-generating dynamic group detail page routes",
+      "file_type": "concept",
+      "id": "arch/generateStaticParams",
+      "community": 2,
+      "norm_label": "generatestaticparams"
+    },
+    {
+      "label": "Header Component",
+      "type": "concept",
+      "source_location": "AGENTS.md",
+      "confidence": 0.8,
+      "description": "Navigation header with mobile menu using 'use client' for interactivity",
+      "file_type": "concept",
+      "id": "component/header",
+      "community": 5,
+      "norm_label": "header component"
+    },
+    {
+      "label": "GroupCard Component",
+      "type": "concept",
+      "source_location": "AGENTS.md",
+      "confidence": 0.8,
+      "description": "Displays group information with join button and QR code",
+      "file_type": "concept",
+      "id": "component/group-card",
+      "community": 2,
+      "norm_label": "groupcard component"
+    },
+    {
+      "label": "BusinessCard Component",
+      "type": "concept",
+      "source_location": "AGENTS.md",
+      "confidence": 0.8,
+      "description": "Displays business directory listings",
+      "file_type": "concept",
+      "id": "component/business-card",
+      "community": 21,
+      "norm_label": "businesscard component"
+    },
+    {
+      "label": "QrCode Component",
+      "type": "concept",
+      "source_location": "AGENTS.md",
+      "confidence": 0.8,
+      "description": "Server component rendering SVG QR codes at build time",
+      "file_type": "concept",
+      "id": "component/qrcode",
+      "community": 2,
+      "norm_label": "qrcode component"
+    },
+    {
+      "label": "JoinButton Component",
+      "type": "concept",
+      "source_location": "AGENTS.md",
+      "confidence": 0.8,
+      "description": "WhatsApp green button for group join actions",
+      "file_type": "concept",
+      "id": "component/join-button",
+      "community": 1,
+      "norm_label": "joinbutton component"
+    },
+    {
+      "label": "CopyLinkButton Component",
+      "type": "concept",
+      "source_location": "AGENTS.md",
+      "confidence": 0.8,
+      "description": "Client component for copying join links",
+      "file_type": "concept",
+      "id": "component/copy-link-button",
+      "community": 1,
+      "norm_label": "copylinkbutton component"
+    },
+    {
+      "label": "StickyJoinBar Component",
+      "type": "concept",
+      "source_location": "AGENTS.md",
+      "confidence": 0.8,
+      "description": "Sticky bar for mobile CTA access",
+      "file_type": "concept",
+      "id": "component/sticky-join-bar",
+      "community": 5,
+      "norm_label": "stickyjoinbar component"
+    },
+    {
+      "label": "Footer Component",
+      "type": "concept",
+      "source_location": "AGENTS.md",
+      "confidence": 0.8,
+      "description": "Footer with disclaimers and links",
+      "file_type": "concept",
+      "id": "component/footer",
+      "community": 22,
+      "norm_label": "footer component"
+    },
+    {
+      "label": "No Database",
+      "type": "guideline",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Fully static architecture; future v2 posting board will need database",
+      "file_type": "concept",
+      "id": "constraint/no-db",
+      "community": 4,
+      "norm_label": "no database"
+    },
+    {
+      "label": "No Authentication",
+      "type": "guideline",
+      "source_location": "AGENTS.md",
+      "confidence": 1.0,
+      "description": "Free to host, no user accounts or auth required",
+      "file_type": "concept",
+      "id": "constraint/no-auth",
+      "community": 4,
+      "norm_label": "no authentication"
+    },
+    {
+      "label": "npm run dev",
+      "type": "tool",
+      "source_location": "DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Start local development server at http://localhost:3000",
+      "file_type": "concept",
+      "id": "npm-script/dev",
+      "community": 44,
+      "norm_label": "npm run dev"
+    },
+    {
+      "label": "npm run build",
+      "type": "tool",
+      "source_location": "DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Production static generation; must pass before deploying",
+      "file_type": "concept",
+      "id": "npm-script/build",
+      "community": 4,
+      "norm_label": "npm run build"
+    },
+    {
+      "label": "npm run lint",
+      "type": "tool",
+      "source_location": "DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Code quality and type checking",
+      "file_type": "concept",
+      "id": "npm-script/lint",
+      "community": 45,
+      "norm_label": "npm run lint"
+    },
+    {
+      "label": "Route params are Promises",
+      "type": "guideline",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Next.js 16 breaking change: route params and searchParams must be awaited",
+      "file_type": "concept",
+      "id": "gotcha/params-promises",
+      "community": 2,
+      "norm_label": "route params are promises"
+    },
+    {
+      "label": "Tailwind Gradient Utility",
+      "type": "guideline",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Next.js 16: Tailwind v4 uses bg-linear-to-* not bg-gradient-to-*",
+      "file_type": "concept",
+      "id": "gotcha/tailwind-gradient",
+      "community": 1,
+      "norm_label": "tailwind gradient utility"
+    },
+    {
+      "label": "Home Page",
+      "type": "concept",
+      "source_location": "AGENTS.md",
+      "confidence": 0.8,
+      "description": "Landing page with Organization and WebSite JSON-LD",
+      "file_type": "concept",
+      "id": "page/home",
+      "community": 47,
+      "norm_label": "home page"
+    },
+    {
+      "label": "FAQ Page",
+      "type": "concept",
+      "source_location": "DEVELOPMENT.md",
+      "confidence": 0.8,
+      "description": "FAQs with FAQPage JSON-LD schema",
+      "file_type": "concept",
+      "id": "page/faq",
+      "community": 0,
+      "norm_label": "faq page"
+    },
+    {
+      "label": "Group Detail Page",
+      "type": "concept",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Dynamic pages for each group with BreadcrumbList JSON-LD and generateStaticParams",
+      "file_type": "concept",
+      "id": "page/group-details",
+      "community": 3,
+      "norm_label": "group detail page"
+    },
+    {
+      "label": "Newcomer's Guide Page",
+      "type": "concept",
+      "source_location": "README.md, AGENTS.md",
+      "confidence": 0.8,
+      "description": "Information for newcomers on groceries, temples, banking, getting around",
+      "file_type": "concept",
+      "id": "page/newcomers",
+      "community": 0,
+      "norm_label": "newcomer's guide page"
+    },
+    {
+      "label": "Business Directory Page",
+      "type": "concept",
+      "source_location": "README.md",
+      "confidence": 0.8,
+      "description": "Community business directory with desi-owned businesses",
+      "file_type": "concept",
+      "id": "page/businesses",
+      "community": 0,
+      "norm_label": "business directory page"
+    },
+    {
+      "label": "Guidelines Page",
+      "type": "concept",
+      "source_location": "README.md",
+      "confidence": 0.8,
+      "description": "Community guidelines and expectations",
+      "file_type": "concept",
+      "id": "page/guidelines",
+      "community": 46,
+      "norm_label": "guidelines page"
+    },
+    {
+      "label": "Safety Page",
+      "type": "concept",
+      "source_location": "README.md, AGENTS.md",
+      "confidence": 0.8,
+      "description": "Safety information and disclaimers",
+      "file_type": "concept",
+      "id": "page/safety",
+      "community": 48,
+      "norm_label": "safety page"
+    },
+    {
+      "label": "sitemap.ts",
+      "type": "concept",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Dynamic sitemap generation for SEO",
+      "file_type": "concept",
+      "id": "routing/sitemap",
+      "community": 3,
+      "norm_label": "sitemap.ts"
+    },
+    {
+      "label": "robots.ts",
+      "type": "concept",
+      "source_location": "AGENTS.md, DEVELOPMENT.md",
+      "confidence": 1.0,
+      "description": "Robots configuration for search engines",
+      "file_type": "concept",
+      "id": "routing/robots",
+      "community": 3,
+      "norm_label": "robots.ts"
+    },
+    {
+      "label": "opengraph-image.tsx",
+      "type": "concept",
+      "source_location": "AGENTS.md",
+      "confidence": 1.0,
+      "description": "Generated social media preview images",
+      "file_type": "concept",
+      "id": "routing/opengraph-image",
+      "community": 50,
+      "norm_label": "opengraph-image.tsx"
+    },
+    {
+      "label": "not-found.tsx",
+      "type": "concept",
+      "source_location": "AGENTS.md",
+      "confidence": 0.8,
+      "description": "Custom 404 page",
+      "file_type": "concept",
+      "id": "routing/not-found",
+      "community": 49,
+      "norm_label": "not-found.tsx"
+    }
+  ],
+  "links": [
+    {
+      "label": "follows",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "project/desi-gr-hub",
+      "target": "arch/content-as-data",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "uses",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "project/desi-gr-hub",
+      "target": "arch/static-generation",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "deployed on",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "project/desi-gr-hub",
+      "target": "deploy/vercel",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "implements",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "project/desi-gr-hub",
+      "target": "feature/mobile-first",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "implements",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "project/desi-gr-hub",
+      "target": "feature/whatsapp-integration",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "built with",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "project/desi-gr-hub",
+      "target": "tech/nextjs-16",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "built with",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "project/desi-gr-hub",
+      "target": "tech/react-19",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "built with",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "project/desi-gr-hub",
+      "target": "tech/tailwind-v4",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "built with",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "project/desi-gr-hub",
+      "target": "tech/typescript",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "powers contact form in",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "tech/formspree",
+      "target": "project/desi-gr-hub",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "affects",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "gotcha/params-promises",
+      "target": "tech/nextjs-16",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "provides",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "tech/nextjs-16",
+      "target": "arch/app-router",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "provides",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "tech/nextjs-16",
+      "target": "arch/generateStaticParams",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "provides",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "tech/nextjs-16",
+      "target": "arch/server-components",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "affects",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "gotcha/tailwind-gradient",
+      "target": "tech/tailwind-v4",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "uses",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "feature/qr-codes",
+      "target": "tech/qrcode",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "used by",
+      "confidence": 0.8,
+      "source_file": "",
+      "source": "arch/server-components",
+      "target": "component/group-card",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "used by",
+      "confidence": 0.8,
+      "source_file": "",
+      "source": "arch/server-components",
+      "target": "component/qrcode",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "enforces",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "arch/static-generation",
+      "target": "constraint/no-auth",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "enforces",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "arch/static-generation",
+      "target": "constraint/no-db",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "executes",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "npm-script/build",
+      "target": "arch/static-generation",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "includes",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "arch/content-as-data",
+      "target": "data/announcements",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "includes",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "arch/content-as-data",
+      "target": "data/businesses",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "includes",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "arch/content-as-data",
+      "target": "data/faqs",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "includes",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "arch/content-as-data",
+      "target": "data/groups",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "includes",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "arch/content-as-data",
+      "target": "data/guidelines",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "includes",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "arch/content-as-data",
+      "target": "data/newcomers",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "includes",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "arch/content-as-data",
+      "target": "data/safety",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "includes",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "arch/content-as-data",
+      "target": "data/site",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "uses",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "arch/content-as-data",
+      "target": "lib/types",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "integrates with",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "feature/seo",
+      "target": "deploy/google-search-console",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "integrates with",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "feature/seo",
+      "target": "deploy/bing-webmaster",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "powers",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "data/groups",
+      "target": "page/group-details",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "feeds",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "data/groups",
+      "target": "routing/sitemap",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "powers",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "data/faqs",
+      "target": "page/faq",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "powers",
+      "confidence": 0.8,
+      "source_file": "",
+      "source": "data/newcomers",
+      "target": "page/newcomers",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "powers",
+      "confidence": 0.8,
+      "source_file": "",
+      "source": "data/businesses",
+      "target": "page/businesses",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "informs",
+      "confidence": 0.8,
+      "source_file": "",
+      "source": "feature/mobile-first",
+      "target": "design/color-scheme",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "supports",
+      "confidence": 0.8,
+      "source_file": "",
+      "source": "component/copy-link-button",
+      "target": "feature/whatsapp-integration",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "uses",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "feature/whatsapp-integration",
+      "target": "component/join-button",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "includes",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "feature/whatsapp-integration",
+      "target": "feature/qr-codes",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "implements",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "feature/qr-codes",
+      "target": "component/qrcode",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "generates",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "npm-script/build",
+      "target": "feature/qr-codes",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "includes",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "page/group-details",
+      "target": "feature/qr-codes",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "uses",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "feature/seo",
+      "target": "routing/robots",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "uses",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "feature/seo",
+      "target": "routing/sitemap",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "requires",
+      "confidence": 1.0,
+      "source_file": "",
+      "source": "design/color-scheme",
+      "target": "component/join-button",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "contains",
+      "confidence": 0.8,
+      "source_file": "",
+      "source": "component/header",
+      "target": "component/sticky-join-bar",
+      "confidence_score": 1.0
+    },
+    {
+      "label": "displays",
+      "confidence": 0.8,
+      "source_file": "",
+      "source": "page/group-details",
+      "target": "component/group-card",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "77f1ae6c1cbf8973105cdebea0d22601debcf1f8"
+}
