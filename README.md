@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Desi GR Hub
 
-## Getting Started
+**The online front door for the Indian & South Asian community in Grand Rapids and West Michigan.**
 
-First, run the development server:
+Desi GR Hub is a free WhatsApp community where desi folks around Grand Rapids find rides, housing and roommates, buy and sell, and get everyday questions answered. This website is where newcomers discover the community, understand what each group is for, and join in a single tap.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Why it exists
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Most people meet Desi GR Hub through a link forwarded in WhatsApp, on their phone, often within days of moving to a new city. They need to instantly understand what this is and how to join. So the site is built around that moment:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Mobile-first.** Around 95% of visitors arrive on a phone, so every screen is designed for a thumb first.
+- **One tap to join.** Each group has a direct WhatsApp link and a scannable QR code.
+- **A warm welcome.** A Newcomer's Guide to Grand Rapids, clear guidelines, and honest safety notes help people feel at home fast.
+- **Easy to find.** Written to show up when someone searches for the Indian community in Grand Rapids.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## What's inside
 
-## Learn More
+- **Group directory** with a detail page for each WhatsApp group: purpose, guidelines, a QR code, and share and join buttons.
+- **Newcomer's Guide** covering groceries, temples, banking and SSN basics, and getting around.
+- **Community business directory** of desi-owned businesses serving West Michigan.
+- **FAQ, guidelines, and safety** pages that set expectations and build trust.
+- **Contact form** for suggestions, reports, and business-listing requests.
 
-To learn more about Next.js, take a look at the following resources:
+## How it's built
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+A deliberately simple, durable setup that stays fast and costs nothing to run:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Fully static** pages, so the site is quick even on cheap phones and spotty data, and hosts for free.
+- **Content as data.** Everything (groups, FAQs, announcements, businesses) lives in plain typed files, so updating the site is editing text, not code, and never touching the design.
+- **Built for sharing and search.** Every page ships rich WhatsApp link previews and search-engine metadata, tuned so the community grows through forwards and Google alike.
+- **Modern, bold look.** A dark theme with warm saffron-to-violet accents and WhatsApp green reserved for the join buttons.
 
-## Deploy on Vercel
+Under the hood: Next.js, React, TypeScript, and Tailwind CSS.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Learn more
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Running, updating, and publishing the site:** [DEVELOPMENT.md](./DEVELOPMENT.md)
+- **Architecture and conventions:** [AGENTS.md](./AGENTS.md)
