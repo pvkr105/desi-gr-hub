@@ -1,26 +1,58 @@
 import type { GuideSection } from "@/lib/types";
 
-// NEWCOMER'S GUIDE, PLACEHOLDER CONTENT.
-// ⚠️ ADMIN: These entries are plausible placeholders to review and replace with
-// real, verified local recommendations before sharing widely. Edit freely, the
-// page renders whatever is in this array.
+// NEWCOMER'S GUIDE.
+// Real Grand Rapids / West Michigan places, gathered from public listings.
+// ⚠️ ADMIN: hours, phone numbers, and businesses change. Re-check details
+// periodically and add community favorites as the group suggests them.
 
 export const newcomerSections: GuideSection[] = [
   {
     id: "groceries-restaurants",
     title: "Desi Groceries & Restaurants",
     intro:
-      "Where to find Indian and South Asian groceries, spices, and food in Grand Rapids and West Michigan.",
+      "Where to find Indian and South Asian groceries, spices, and food around Grand Rapids.",
     entries: [
       {
-        name: "Indian grocery stores",
+        name: "India Market",
         detail:
-          "Grand Rapids has several South Asian grocery stores stocking spices, lentils, fresh produce, and frozen favorites. Ask in Community Q&A for the current favorites near you.",
+          "Indian grocery store on 28th St SE stocking fresh vegetables, flours, lentils, spices, and frozen foods. 5773 28th St SE, Grand Rapids, MI 49546. (616) 855-1141.",
+        url: "https://indiamarketgr.com/",
       },
       {
-        name: "Desi restaurants",
+        name: "Indian Masala",
         detail:
-          "From North Indian to South Indian and Indo-Chinese, a handful of desi restaurants serve the GR area. Members are happy to share recommendations.",
+          "Authentic, mostly North Indian restaurant right next to India Market. A popular first stop for newcomers. 5769 28th St SE, Grand Rapids, MI 49546.",
+        url: "https://www.indianmasalagr.us/",
+      },
+      {
+        name: "Pind Indian Cuisine",
+        detail:
+          "Well-loved downtown spot known for its naan and cozy atmosphere. 241 Fulton St W, Grand Rapids, MI 49504. (616) 805-4767.",
+        url: "https://pindindiancuisinegr.com/",
+      },
+      {
+        name: "Madras Indian Grill",
+        detail:
+          "South Indian cuisine known for dosas and biryani. 2030 28th St SE, Grand Rapids, MI 49508.",
+        url: "https://madrasindiangrill.com/",
+      },
+      {
+        name: "Roti Indian Kitchen",
+        detail:
+          "Newer spot on 28th St praised for authentic North Indian dishes. 5070 28th St SE, Suite C, Grand Rapids, MI 49512.",
+        url: "https://rotigr.us/",
+      },
+      {
+        name: "Curry Leaf",
+        detail:
+          "Indian stall inside the Grand Rapids Downtown Market, great for a quick downtown bite. 435 Ionia Ave SW, Grand Rapids, MI 49503.",
+        url: "https://www.downtownmarketgr.com/market-hall/curry-leaf",
+      },
+      {
+        name: "Mithu Sri Lankan & Indian Cuisine",
+        detail:
+          "Sri Lankan and Indian dishes, a community favorite for something a little different. 4309 Kalamazoo Ave SE, Grand Rapids, MI 49508.",
+        url: "https://www.mithusrilankanandindiancuisine.com/",
       },
     ],
   },
@@ -31,37 +63,15 @@ export const newcomerSections: GuideSection[] = [
       "Places of worship and cultural spaces that bring the community together.",
     entries: [
       {
-        name: "Temples & places of worship",
+        name: "West Michigan Hindu Temple",
         detail:
-          "West Michigan has Hindu temples and multi-faith spaces that host festivals and weekly gatherings. Ask the community for timings and directions.",
+          "The area's Hindu temple and cultural center, hosting festivals and weekly gatherings. 4870 Whitneyville Ave SE, Ada, MI 49301. (616) 868-9909.",
+        url: "http://www.westmichiganhindutemple.org/",
       },
       {
         name: "Cultural & student associations",
         detail:
-          "Local universities and cultural groups organize Diwali, Holi, and other celebrations open to the community.",
-      },
-    ],
-  },
-  {
-    id: "settling-in",
-    title: "Banking, SSN & Phone-Plan Basics",
-    intro:
-      "The practical first steps for newcomers settling into the United States.",
-    entries: [
-      {
-        name: "Social Security Number (SSN)",
-        detail:
-          "If you're eligible, apply at a local Social Security office. Bring your passport, visa, and required documents, check the current requirements before you go.",
-      },
-      {
-        name: "Opening a bank account",
-        detail:
-          "Most major banks and local credit unions can open an account with your passport and proof of address. Ask about student and newcomer accounts.",
-      },
-      {
-        name: "Phone plans",
-        detail:
-          "Prepaid and postpaid plans are widely available. Many newcomers start with a prepaid SIM and switch once they have an SSN and credit history.",
+          "Grand Valley State University, Michigan State, and local cultural groups organize Diwali, Holi, and Garba/Navratri events that are often open to the community. Watch the Announcements group for dates.",
       },
     ],
   },
@@ -72,9 +82,10 @@ export const newcomerSections: GuideSection[] = [
       "Transit options and community rides for getting around Grand Rapids and West Michigan.",
     entries: [
       {
-        name: "Public transit (The Rapid)",
+        name: "The Rapid (public transit)",
         detail:
-          "Grand Rapids is served by The Rapid bus system, with routes covering downtown, campuses, and major corridors.",
+          "Grand Rapids' bus system covers downtown, Kentwood, Wyoming, Walker, the airport, and GVSU's Allendale campus (Laker Line). Students at local colleges (GVSU, GRCC, and others) ride free with a valid student ID. Otherwise fare is about $1.75 per ride with a daily cap around $5.25. Check routes and live times at ridetherapid.org.",
+        url: "https://www.ridetherapid.org/",
       },
       {
         name: "Community carpools",

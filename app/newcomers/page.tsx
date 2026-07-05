@@ -41,14 +41,25 @@ export default function NewcomersPage() {
                 <div key={e.name} className="glass rounded-2xl p-5">
                   <h3 className="font-semibold">{e.name}</h3>
                   <p className="mt-1 text-sm text-muted">{e.detail}</p>
-                  {e.url && (
-                    <Link
-                      href={e.url}
-                      className="mt-2 inline-block text-sm text-saffron underline underline-offset-2"
-                    >
-                      Learn more →
-                    </Link>
-                  )}
+                  {e.url &&
+                    (e.url.startsWith("http") ? (
+                      // External (map, restaurant, temple) opens in a new tab.
+                      <a
+                        href={e.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-block text-sm text-saffron underline underline-offset-2"
+                      >
+                        Learn more →
+                      </a>
+                    ) : (
+                      <Link
+                        href={e.url}
+                        className="mt-2 inline-block text-sm text-saffron underline underline-offset-2"
+                      >
+                        Learn more →
+                      </Link>
+                    ))}
                 </div>
               ))}
             </div>
