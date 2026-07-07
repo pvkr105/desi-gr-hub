@@ -109,21 +109,32 @@ export default async function PostDetailPage({
       ) : (
         <div className="glass mt-6 rounded-2xl p-5">
           <h2 className="font-display text-lg font-bold">Contact</h2>
-          {post.contact ? (
-            post.contact.startsWith("http") ? (
-              <a
-                href={post.contact}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass mt-3 inline-flex min-h-11 items-center rounded-xl border-line px-4 text-sm font-semibold"
-              >
-                Contact the poster
-              </a>
-            ) : (
-              <p className="mt-3 whitespace-pre-wrap text-sm">{post.contact}</p>
-            )
+          {user ? (
+            <>
+              {post.contact ? (
+                post.contact.startsWith("http") ? (
+                  <a
+                    href={post.contact}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="glass mt-3 inline-flex min-h-11 items-center rounded-xl border-line px-4 text-sm font-semibold"
+                  >
+                    Contact the poster
+                  </a>
+                ) : (
+                  <p className="mt-3 whitespace-pre-wrap text-sm">{post.contact}</p>
+                )
+              ) : (
+                <p className="mt-3 text-sm text-muted">No contact info provided.</p>
+              )}
+            </>
           ) : (
-            <p className="mt-3 text-sm text-muted">No contact info provided.</p>
+            <p className="mt-3 text-sm text-muted">
+              <Link href="/account?next={currentPath}" className="text-saffron underline underline-offset-2">
+                Sign in
+              </Link>{" "}
+              to see contact info
+            </p>
           )}
           {post.expires_at && (
             <p className="mt-4 text-xs text-muted">
