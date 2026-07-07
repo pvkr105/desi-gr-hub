@@ -245,7 +245,13 @@ export function PostForm({ type, post }: { type: PostType; post?: Post }) {
 
         <button
           type="button"
-          onClick={() => setShowModal(true)}
+          onClick={() => {
+            if (formRef.current?.checkValidity()) {
+              setShowModal(true);
+            } else {
+              formRef.current?.reportValidity();
+            }
+          }}
           disabled={uploading}
           className="inline-flex min-h-11 items-center justify-center self-start rounded-full border border-line px-6 text-sm font-semibold hover:border-saffron disabled:opacity-50"
         >
@@ -269,8 +275,8 @@ export function PostForm({ type, post }: { type: PostType; post?: Post }) {
               Before you post
             </h2>
             <p className="mt-3 text-sm">
-              I pledge this post is honest and accurate to the best of my knowledge, and that I am
-              not scamming or misleading anyone.
+              Your post must be honest and accurate to the best of your knowledge. No scams or
+              misleading content.
             </p>
             <p className="mt-3 rounded-xl bg-bg-soft p-3 text-xs text-muted">{communityDisclaimer}</p>
             <div className="mt-5 flex flex-wrap justify-end gap-3">
