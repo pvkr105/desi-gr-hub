@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyJoinBar } from "@/components/StickyJoinBar";
 import { WeatherBanner } from "@/components/WeatherBanner";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -63,6 +64,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <StickyJoinBar />
+        <Analytics />
       </body>
     </html>
   );
