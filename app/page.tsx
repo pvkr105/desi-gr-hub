@@ -4,6 +4,7 @@ import { site } from "@/data/site";
 import { GroupCard } from "@/components/GroupCard";
 import { JoinButton } from "@/components/JoinButton";
 import { JsonLd } from "@/components/JsonLd";
+import { ForexIndicator } from "@/components/ForexIndicator";
 
 const steps = [
   { n: "1", title: "Join the hub", body: "Tap Join to open Desi GR Hub in WhatsApp and join the main community." },
@@ -50,6 +51,9 @@ export default function HomePage() {
           <Link href="/groups" className="min-h-11 rounded-full border border-line px-5 py-2.5 text-sm font-medium hover:border-saffron">
             Browse groups
           </Link>
+        </div>
+        <div className="mt-6">
+          <ForexIndicator />
         </div>
         <p className="mt-6 max-w-2xl text-sm text-muted">{site.mainHubBlurb}</p>
       </section>

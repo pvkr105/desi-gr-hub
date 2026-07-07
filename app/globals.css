@@ -3,14 +3,15 @@
 /* Design tokens, bold dark theme. Utilities like bg-bg, text-ink, from-saffron
    are generated from these. */
 @theme {
+  /* Brand tokens — see public/desi-gr-hub-logo/brand.css */
   --color-bg: #0b0b12;
-  --color-bg-soft: #12121c;
-  --color-ink: #f5f3ff;
-  --color-muted: #a6a3b8;
-  --color-line: rgba(255, 255, 255, 0.1);
-  --color-saffron: #ff8a3d;
+  --color-bg-soft: #15151f;
+  --color-ink: #f4f4f8;
+  --color-muted: #9aa0b4;
+  --color-line: #2b2b3d;
+  --color-saffron: #ff8a00;
   --color-magenta: #ff4d8d;
-  --color-violet: #a855f7;
+  --color-violet: #8b5cf6;
   --color-wa: #25d366;
   --color-wa-dark: #1da851;
 
@@ -26,10 +27,10 @@ html {
 body {
   background-color: var(--color-bg);
   color: var(--color-ink);
-  /* Subtle radial saffron→violet glows on the near-black canvas. */
+  /* Subtle radial saffron→violet glows on the near-black canvas (brand stops). */
   background-image:
-    radial-gradient(60rem 60rem at 15% -10%, rgba(255, 138, 61, 0.14), transparent 60%),
-    radial-gradient(50rem 50rem at 100% 0%, rgba(168, 85, 247, 0.16), transparent 55%);
+    radial-gradient(60rem 60rem at 15% -10%, rgba(255, 138, 0, 0.14), transparent 60%),
+    radial-gradient(50rem 50rem at 100% 0%, rgba(139, 92, 246, 0.16), transparent 55%);
   background-attachment: fixed;
 }
 

@@ -36,6 +36,20 @@ export interface Guideline {
   detail: string;
 }
 
+export interface Event {
+  /** ISO date, e.g. "2026-08-15". */
+  date: string;
+  /** Optional display time, e.g. "6:00 PM". */
+  time?: string;
+  title: string;
+  location: string;
+  /** Optional Google Maps (or any) link for the location. */
+  mapUrl?: string;
+  description: string;
+  /** Optional RSVP / details link (usually a WhatsApp group or the main hub). */
+  rsvpUrl?: string;
+}
+
 /** One entry inside a Newcomer's Guide section. */
 export interface GuideEntry {
   name: string;
@@ -49,6 +63,48 @@ export interface GuideSection {
   title: string;
   intro: string;
   entries: GuideEntry[];
+}
+
+// ---------- v2 community board (DB-backed via Supabase) ----------
+
+export type PostType = "question" | "housing" | "marketplace";
+export type PostStatus = "active" | "closed" | "removed";
+export type TargetKind = "post" | "answer";
+
+export interface Profile {
+  id: string;
+  display_name: string | null;
+  avatar_url: string | null;
+  is_admin: boolean;
+}
+
+export interface Post {
+  id: string;
+  type: PostType;
+  category: string | null;
+  title: string;
+  body: string;
+  author_id: string;
+  contact: string | null;
+  price: number | null;
+  location: string | null;
+  status: PostStatus;
+  score: number;
+  details: Record<string, unknown>;
+  created_at: string;
+  expires_at: string | null;
+  /** Joined author profile (present when the query selects it). */
+  author?: Profile | null;
+}
+
+export interface Answer {
+  id: string;
+  post_id: string;
+  body: string;
+  author_id: string;
+  score: number;
+  created_at: string;
+  author?: Profile | null;
 }
 
 export type BusinessCategory =

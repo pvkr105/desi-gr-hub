@@ -2,11 +2,15 @@ import Link from "next/link";
 import { groups } from "@/data/groups";
 import { footerDisclaimer } from "@/data/safety";
 import { site } from "@/data/site";
+import { LogoMark } from "./LogoMark";
 
 const pageLinks = [
+  { href: "/community", label: "Community Board" },
   { href: "/groups", label: "All Groups" },
+  { href: "/events", label: "Events & Meetups" },
   { href: "/newcomers", label: "Newcomer's Guide" },
   { href: "/businesses", label: "Business Directory" },
+  { href: "/currency", label: "Currency Converter" },
   { href: "/faq", label: "FAQ" },
   { href: "/guidelines", label: "Guidelines" },
   { href: "/safety", label: "Safety & Disclaimers" },
@@ -19,7 +23,10 @@ export function Footer() {
     <footer className="border-t border-line px-4 py-10 sm:px-6">
       <div className="mx-auto grid w-full max-w-5xl gap-8 sm:grid-cols-3">
         <div>
-          <p className="font-display text-lg font-extrabold gradient-text">Desi GR Hub</p>
+          <p className="flex items-center gap-2 font-display text-lg font-extrabold">
+            <LogoMark className="h-6 w-6 shrink-0" />
+            <span className="gradient-text">Desi GR Hub</span>
+          </p>
           <p className="mt-2 text-sm text-muted">
             The Indian &amp; South Asian community in Grand Rapids &amp; West Michigan.
           </p>

@@ -1,0 +1,18 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Desi GR Hub mark">
+  <defs>
+    <linearGradient id="gc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF8A00"/>
+      <stop offset="0.5" stop-color="#FF4D8D"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  <line x1="64" y1="64" x2="37" y2="37" stroke="#FF8A00" stroke-width="4.5"/>
+  <line x1="64" y1="64" x2="91" y2="37" stroke="#FF4D8D" stroke-width="4.5"/>
+  <line x1="64" y1="64" x2="37" y2="91" stroke="#FF4D8D" stroke-width="4.5"/>
+  <line x1="64" y1="64" x2="91" y2="91" stroke="#8B5CF6" stroke-width="4.5"/>
+  <circle cx="64" cy="64" r="17" fill="url(#gc)"/>
+  <circle cx="37" cy="37" r="10" fill="#FF8A00"/>
+  <circle cx="91" cy="37" r="10" fill="#FF4D8D"/>
+  <circle cx="37" cy="91" r="10" fill="#FF4D8D"/>
+  <circle cx="91" cy="91" r="10" fill="#8B5CF6"/>
+</svg>

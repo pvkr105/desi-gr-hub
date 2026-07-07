@@ -16,7 +16,9 @@ Most people meet Desi GR Hub through a link forwarded in WhatsApp, on their phon
 ## What's inside
 
 - **Group directory** with a detail page for each WhatsApp group: purpose, guidelines, a QR code, and share and join buttons.
+- **Community board** — a Reddit-style Q&A, housing and roommate listings, and a buy/sell marketplace. Members sign in with Google or email to post; listings expire on their own.
 - **Newcomer's Guide** covering groceries, temples, banking and SSN basics, and getting around.
+- **Events & meetups**, a live **currency converter** (USD↔INR and 200+ currencies), and a Grand Rapids **weather banner** for newcomers.
 - **Community business directory** of desi-owned businesses serving West Michigan.
 - **FAQ, guidelines, and safety** pages that set expectations and build trust.
 - **Contact form** for suggestions, reports, and business-listing requests.
@@ -25,12 +27,12 @@ Most people meet Desi GR Hub through a link forwarded in WhatsApp, on their phon
 
 A deliberately simple, durable setup that stays fast and costs nothing to run:
 
-- **Fully static** pages, so the site is quick even on cheap phones and spotty data, and hosts for free.
-- **Content as data.** Everything (groups, FAQs, announcements, businesses) lives in plain typed files, so updating the site is editing text, not code, and never touching the design.
+- **Static where it counts, dynamic where it helps.** The marketing pages are fully static — quick even on cheap phones and spotty data, and free to host. The community board adds a lightweight, free database (Supabase) only where members actually post and reply.
+- **Content as data.** The site's own content (groups, FAQs, announcements, events, businesses) lives in plain typed files, so updating it is editing text, not code, and never touching the design. Community posts live in the database.
 - **Built for sharing and search.** Every page ships rich WhatsApp link previews and search-engine metadata, tuned so the community grows through forwards and Google alike.
 - **Modern, bold look.** A dark theme with warm saffron-to-violet accents and WhatsApp green reserved for the join buttons.
 
-Under the hood: Next.js, React, TypeScript, and Tailwind CSS.
+Under the hood: Next.js, React, TypeScript, and Tailwind CSS, with Supabase powering the community board.
 
 ## Learn more
 

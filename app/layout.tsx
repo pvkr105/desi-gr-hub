@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StickyJoinBar } from "@/components/StickyJoinBar";
+import { WeatherBanner } from "@/components/WeatherBanner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -12,9 +13,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const sora = Sora({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: ["500", "700"],
   variable: "--font-display",
   display: "swap",
 });
@@ -52,11 +53,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${sora.variable}`}>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="min-h-dvh font-sans antialiased">
         <Header />
         {/* pb accounts for the mobile sticky join bar so content isn't hidden. */}
         <main className="mx-auto w-full max-w-5xl px-4 pb-28 pt-6 sm:px-6 md:pb-16">
+          <WeatherBanner />
           {children}
         </main>
         <Footer />

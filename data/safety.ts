@@ -13,3 +13,7 @@ export const disclaimers: string[] = [
 // One-line version for the footer.
 export const footerDisclaimer =
   "Community-run and unofficial. Admins moderate only and are not liable for interactions, transactions, or outcomes. Participate at your own discretion.";
+
+// Shown on every community listing and the post-creation form. Never remove.
+export const communityDisclaimer =
+  "⚠️ Posts are user-submitted and not vetted by the admins. Never send money or deposits before verifying a person and listing. Meet in public places, and treat prices and offers with caution. Report anything suspicious.";

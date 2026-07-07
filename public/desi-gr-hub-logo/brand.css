@@ -1,0 +1,23 @@
+/* Desi GR Hub — brand tokens. Map these into Tailwind theme config. */
+:root {
+  --bg: #0B0B12;            /* page background */
+  --surface: #15151F;       /* cards / tiles */
+  --border: #2B2B3D;        /* card borders */
+  --text: #F4F4F8;          /* primary text */
+  --text-muted: #9AA0B4;    /* secondary text */
+  --saffron: #FF8A00;       /* gradient stop 1 */
+  --pink: #FF4D8D;          /* gradient stop 2 */
+  --violet: #8B5CF6;        /* gradient stop 3 */
+  --whatsapp: #25D366;      /* Join CTAs ONLY */
+  --gradient-brand: linear-gradient(135deg, #FF8A00, #FF4D8D, #8B5CF6);
+}
+
+/* Gradient headline text, as used in logo.svg */
+.text-gradient {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Fonts: headings = Space Grotesk (700/500), body = Inter — load via next/font/google */

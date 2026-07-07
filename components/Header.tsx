@@ -3,14 +3,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import { JoinButton } from "./JoinButton";
+import { LogoMark } from "./LogoMark";
 import { site } from "@/data/site";
 
 // Primary nav shown in the header. Full set lives in the footer.
 const navLinks = [
+  { href: "/community", label: "Community" },
   { href: "/groups", label: "Groups" },
+  { href: "/events", label: "Events" },
   { href: "/newcomers", label: "Newcomers" },
-  { href: "/businesses", label: "Businesses" },
-  { href: "/faq", label: "FAQ" },
+  { href: "/currency", label: "Currency" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -22,9 +24,10 @@ export function Header() {
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
         <Link
           href="/"
-          className="text-lg font-extrabold font-display tracking-tight"
+          className="flex items-center gap-2 text-lg font-extrabold font-display tracking-tight"
           onClick={() => setOpen(false)}
         >
+          <LogoMark className="h-7 w-7 shrink-0" />
           <span className="gradient-text">Desi GR Hub</span>
         </Link>
 
