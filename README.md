@@ -2,7 +2,7 @@
 
 **The online front door for the Indian & South Asian community in Grand Rapids and West Michigan.**
 
-Desi GR Hub is a free WhatsApp community where desi folks around Grand Rapids find rides, housing and roommates, buy and sell, and get everyday questions answered. This website is where newcomers discover the community, understand what each group is for, and join in a single tap.
+Desi GR Hub is a free community where desi folks around Grand Rapids find rides, housing and roommates, buy and sell, and get everyday questions answered. This website is where newcomers discover the community, understand what each group is for, and join in a single tap.
 
 ## Why it exists
 

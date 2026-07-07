@@ -11,9 +11,21 @@ import type { PostType } from "@/lib/types";
 const boardTypes: PostType[] = ["question", "housing", "marketplace"];
 
 const steps = [
-  { n: "1", title: "Join the hub", body: "Tap Join to open Desi GR Hub in WhatsApp and join the main community." },
-  { n: "2", title: "Pick your groups", body: "Add the WhatsApp groups you need for rides, accommodation, and more." },
-  { n: "3", title: "Use the board", body: "No WhatsApp required, ask questions, find housing & roommates, and buy or sell right here on the Community Board." },
+  {
+    n: "1",
+    title: "Join the hub",
+    body: "Tap Join to open Desi GR Hub in WhatsApp and join the main community.",
+  },
+  {
+    n: "2",
+    title: "Pick your groups",
+    body: "Add the WhatsApp groups you need for rides, accommodation, and more.",
+  },
+  {
+    n: "3",
+    title: "Use the board",
+    body: "No WhatsApp required, ask questions, find housing & roommates, and buy or sell right here on the Community Board.",
+  },
 ];
 
 export default function HomePage() {
@@ -44,15 +56,23 @@ export default function HomePage() {
           Grand Rapids &amp; West Michigan
         </p>
         <h1 className="font-display text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-          The <span className="gradient-text">Indian &amp; South Asian community</span> in Grand Rapids, Michigan
+          The{" "}
+          <span className="gradient-text">
+            Indian &amp; South Asian community
+          </span>{" "}
+          in Grand Rapids, Michigan
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-muted">
-          Desi GR Hub is a free WhatsApp community for desi folks in Grand Rapids and West Michigan.
-          Find carpools, housing and roommates, buy &amp; sell, and get everyday questions answered.
+          Desi GR Hub is a free community for desi folks in Grand Rapids and
+          West Michigan. Find carpools, housing and roommates, buy &amp; sell,
+          and get everyday questions answered.
         </p>
         <div className="mt-6 flex flex-wrap items-center gap-3">
           <JoinButton href={site.mainHubUrl}>Join the Community</JoinButton>
-          <Link href="/groups" className="min-h-11 rounded-full border border-line px-5 py-2.5 text-sm font-medium transition-colors hover:border-saffron hover:text-saffron">
+          <Link
+            href="/groups"
+            className="min-h-11 rounded-full border border-line px-5 py-2.5 text-sm font-medium transition-colors hover:border-saffron hover:text-saffron"
+          >
             Browse groups
           </Link>
         </div>
@@ -67,9 +87,15 @@ export default function HomePage() {
         <div className="flex items-end justify-between gap-3">
           <div>
             <h2 className="font-display text-2xl font-bold">Community Board</h2>
-            <p className="mt-1 text-muted">Ask questions, find housing &amp; roommates, and buy or sell, free for everyone in GR.</p>
+            <p className="mt-1 text-muted">
+              Ask questions, find housing &amp; roommates, and buy or sell, free
+              for everyone in GR.
+            </p>
           </div>
-          <Link href="/community" className="hidden shrink-0 text-sm text-saffron transition-colors hover:text-saffron/80 sm:inline">
+          <Link
+            href="/community"
+            className="hidden shrink-0 text-sm text-saffron transition-colors hover:text-saffron/80 sm:inline"
+          >
             Open the board →
           </Link>
         </div>
@@ -82,10 +108,14 @@ export default function HomePage() {
                 href={`/community/${TYPE_TO_SEGMENT[t]}`}
                 className="glass rounded-2xl p-5 transition-transform hover:-translate-y-0.5"
               >
-                <div className="text-2xl" aria-hidden>{m.emoji}</div>
+                <div className="text-2xl" aria-hidden>
+                  {m.emoji}
+                </div>
                 <h3 className="mt-2 font-display font-bold">{m.label}</h3>
                 <p className="mt-1 text-sm text-muted">{m.blurb}</p>
-                <span className="mt-3 inline-block text-sm text-saffron">Open →</span>
+                <span className="mt-3 inline-block text-sm text-saffron">
+                  Open →
+                </span>
               </Link>
             );
           })}
@@ -95,7 +125,9 @@ export default function HomePage() {
       {/* Groups */}
       <section className="py-8">
         <h2 className="font-display text-2xl font-bold">Community groups</h2>
-        <p className="mt-1 text-muted">Six focused WhatsApp groups, join the ones you need.</p>
+        <p className="mt-1 text-muted">
+          Six focused WhatsApp groups, join the ones you need.
+        </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {groups.map((g) => (
             <GroupCard key={g.slug} group={g} />
@@ -121,19 +153,34 @@ export default function HomePage() {
 
       {/* Teasers */}
       <section className="grid gap-4 py-8 sm:grid-cols-2">
-        <Link href="/newcomers" className="glass rounded-2xl p-6 transition-transform hover:-translate-y-0.5">
-          <h3 className="font-display text-xl font-bold">🧭 New to Grand Rapids?</h3>
+        <Link
+          href="/newcomers"
+          className="glass rounded-2xl p-6 transition-transform hover:-translate-y-0.5"
+        >
+          <h3 className="font-display text-xl font-bold">
+            🧭 New to Grand Rapids?
+          </h3>
           <p className="mt-2 text-sm text-muted">
-            Start here, desi groceries, temples, banking &amp; SSN basics, getting around, and more.
+            Start here, desi groceries, temples, banking &amp; SSN basics,
+            getting around, and more.
           </p>
-          <span className="mt-3 inline-block text-sm text-saffron">Read the Newcomer&apos;s Guide →</span>
+          <span className="mt-3 inline-block text-sm text-saffron">
+            Read the Newcomer&apos;s Guide →
+          </span>
         </Link>
-        <Link href="/businesses" className="glass rounded-2xl p-6 transition-transform hover:-translate-y-0.5">
-          <h3 className="font-display text-xl font-bold">🛍️ Community businesses</h3>
+        <Link
+          href="/businesses"
+          className="glass rounded-2xl p-6 transition-transform hover:-translate-y-0.5"
+        >
+          <h3 className="font-display text-xl font-bold">
+            🛍️ Community businesses
+          </h3>
           <p className="mt-2 text-sm text-muted">
             A curated directory of desi-owned businesses serving West Michigan.
           </p>
-          <span className="mt-3 inline-block text-sm text-saffron">Browse the directory →</span>
+          <span className="mt-3 inline-block text-sm text-saffron">
+            Browse the directory →
+          </span>
         </Link>
       </section>
 
@@ -141,9 +188,13 @@ export default function HomePage() {
       <section className="py-8">
         <div className="glass rounded-2xl p-6">
           <p className="text-sm text-muted">
-            Desi GR Hub is community-run and unofficial. Please participate at your own discretion and
-            verify people and listings before any arrangement.{" "}
-            <Link href="/safety" className="text-saffron underline underline-offset-2 transition-colors hover:text-saffron/80">
+            Desi GR Hub is community-run and unofficial. Please participate at
+            your own discretion and verify people and listings before any
+            arrangement.{" "}
+            <Link
+              href="/safety"
+              className="text-saffron underline underline-offset-2 transition-colors hover:text-saffron/80"
+            >
               Read our safety &amp; disclaimers →
             </Link>
           </p>

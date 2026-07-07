@@ -201,7 +201,7 @@ export function PostForm({ type, post }: { type: PostType; post?: Post }) {
         {/* Images */}
         <div className="flex flex-col gap-2">
           <label htmlFor="post-images" className="text-sm font-medium">
-            Photos <span className="text-muted">(up to {MAX_IMAGES})</span>
+            Photos <span className="text-muted">(up to {MAX_IMAGES}, optional)</span>
           </label>
           {images.length > 0 && (
             <div className="grid grid-cols-4 gap-2">
