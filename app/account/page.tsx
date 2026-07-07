@@ -66,7 +66,7 @@ export default async function AccountPage({
           <form action={signOut}>
             <button
               type="submit"
-              className="inline-flex min-h-11 items-center rounded-xl border border-line px-4 text-sm font-medium text-muted"
+              className="inline-flex min-h-11 items-center rounded-xl border border-line px-4 text-sm font-medium text-muted hover:border-saffron hover:text-ink"
             >
               Sign out
             </button>

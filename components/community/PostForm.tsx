@@ -1,5 +1,5 @@
 import type { PostType } from "@/lib/types";
-import { CATEGORIES } from "@/lib/community";
+import { CATEGORIES, EXPIRY_OPTIONS, DEFAULT_EXPIRY_DAYS } from "@/lib/community";
 import { createPost } from "@/app/community/actions";
 import { communityDisclaimer } from "@/data/safety";
 
@@ -67,6 +67,24 @@ export function PostForm({ type }: { type: PostType }) {
               placeholder="Neighborhood / area"
             />
           </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="post-duration" className="text-sm font-medium">
+              Keep this listing up for
+            </label>
+            <select
+              id="post-duration"
+              name="duration"
+              defaultValue={String(DEFAULT_EXPIRY_DAYS)}
+              className={field}
+            >
+              {EXPIRY_OPTIONS.map((d) => (
+                <option key={d} value={d}>
+                  {d} days
+                </option>
+              ))}
+            </select>
+            <p className="text-xs text-muted">It’ll disappear automatically after this.</p>
+          </div>
         </div>
       )}
 
@@ -78,6 +96,7 @@ export function PostForm({ type }: { type: PostType }) {
           id="post-body"
           name="body"
           required
+          maxLength={8000}
           rows={6}
           className="rounded-xl border border-line bg-bg-soft p-3 text-sm"
           placeholder="Everything the community needs to know"

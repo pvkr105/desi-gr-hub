@@ -31,14 +31,31 @@ export function WeatherBanner() {
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    fetch(URL)
-      .then((r) => r.json())
-      .then((d) => {
-        const c = d?.current;
-        if (typeof c?.temperature_2m === "number") {
-          if (sessionStorage.getItem("gr-weather-dismissed")) setDismissed(true);
-          setW({ temp: c.temperature_2m, feels: c.apparent_temperature, code: c.weather_code });
-        }
+    // Reuse a <30-min-old reading instead of refetching on every page nav.
+    let cached: { t: number; w: Weather } | null = null;
+    try {
+      cached = JSON.parse(sessionStorage.getItem("gr-weather") ?? "null");
+    } catch {}
+    const fresh = cached && Date.now() - cached.t < 30 * 60_000;
+
+    const load: Promise<Weather> = fresh
+      ? Promise.resolve((cached as { t: number; w: Weather }).w)
+      : fetch(URL)
+          .then((r) => r.json())
+          .then((d) => {
+            const c = d?.current;
+            if (typeof c?.temperature_2m !== "number") throw new Error("bad response");
+            const w = { temp: c.temperature_2m, feels: c.apparent_temperature, code: c.weather_code };
+            try {
+              sessionStorage.setItem("gr-weather", JSON.stringify({ t: Date.now(), w }));
+            } catch {}
+            return w;
+          });
+
+    load
+      .then((w) => {
+        if (sessionStorage.getItem("gr-weather-dismissed")) setDismissed(true);
+        setW(w);
       })
       .catch(() => {}); // silent, no layout noise on failure
   }, []);

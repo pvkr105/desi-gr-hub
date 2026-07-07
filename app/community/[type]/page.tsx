@@ -25,23 +25,31 @@ export async function generateMetadata({
   };
 }
 
+const PAGE_SIZE = 30;
+
 export default async function CommunityTypePage({
   params,
   searchParams,
 }: {
   params: Promise<{ type: string }>;
-  searchParams: Promise<{ category?: string; sort?: string }>;
+  searchParams: Promise<{ category?: string; sort?: string; count?: string }>;
 }) {
   const { type } = await params;
   const postType = SEGMENT_TO_TYPE[type];
   if (!postType) notFound();
 
-  const { category, sort } = await searchParams;
+  const { category, sort, count: countParam } = await searchParams;
   const meta = TYPE_META[postType];
-  const posts = await listPosts(postType, {
+  // "Show more" grows the window (?count=60, 90, …) — server-rendered, no client
+  // state. ponytail: capped at 300; switch to real cursor pagination past that.
+  const count = Math.min(Math.max(parseInt(countParam ?? "", 10) || PAGE_SIZE, PAGE_SIZE), 300);
+  const fetched = await listPosts(postType, {
     category,
     sort: sort === "top" ? "top" : "new",
+    limit: count + 1, // one extra row = "is there more?"
   });
+  const hasMore = fetched.length > count;
+  const posts = hasMore ? fetched.slice(0, count) : fetched;
 
   const pill = "inline-flex min-h-11 items-center rounded-full px-4 text-sm";
   const active = "bg-bg-soft text-saffron font-semibold";
@@ -101,6 +109,19 @@ export default async function CommunityTypePage({
           {posts.map((p) => (
             <PostCard key={p.id} post={p} />
           ))}
+        </div>
+      )}
+
+      {hasMore && (
+        <div className="mt-6 flex justify-center">
+          <Link
+            href={`/community/${type}?count=${count + PAGE_SIZE}${
+              category ? `&category=${encodeURIComponent(category)}` : ""
+            }${sort === "top" ? "&sort=top" : ""}`}
+            className="inline-flex min-h-11 items-center rounded-full border border-line px-6 text-sm font-medium hover:border-saffron"
+          >
+            Show more
+          </Link>
         </div>
       )}
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { JoinButton } from "./JoinButton";
 import { LogoMark } from "./LogoMark";
+import { AuthNav } from "./AuthNav";
 import { site } from "@/data/site";
 
 // Primary nav shown in the header. Full set lives in the footer.
@@ -38,6 +39,7 @@ export function Header() {
             </Link>
           ))}
           <JoinButton href={site.mainHubUrl}>Join</JoinButton>
+          <AuthNav />
         </nav>
 
         <button
@@ -69,6 +71,9 @@ export function Header() {
               {l.label}
             </Link>
           ))}
+          <div className="mt-2 border-t border-line pt-3" onClick={() => setOpen(false)}>
+            <AuthNav />
+          </div>
         </nav>
       )}
     </header>

@@ -31,7 +31,7 @@ Each file has short comments explaining what to fill in. Content is typed by `li
 
 The board is the one part of the site that needs a backend. It runs on **Supabase's free tier** (database + sign-in) and still deploys free on Vercel. The rest of the site works with or without it.
 
-- **To turn it on:** follow **[supabase/SETUP.md](./supabase/SETUP.md)** — create a free Supabase project, run the one migration, enable Google + email sign-in, and paste three keys into `.env.local` (locally) and Vercel's env settings (in production). ~15 minutes.
+- **To turn it on:** follow **[supabase/SETUP.md](./supabase/SETUP.md)** — create a free Supabase project, run the migrations, enable Google + email sign-in, and paste three keys into `.env.local` (locally) and Vercel's env settings (in production). ~15 minutes.
 - **Until you do,** the site still builds and every static page works; the board simply shows sign-in / empty states.
 - **Moderating:** make yourself an admin (one SQL line in `supabase/SETUP.md`), then you can delete or close any post and see reported items. Housing and marketplace listings auto-expire after 30 days.
 - **Cost note:** Vercel's free tier is **non-commercial** — keep the board free and ad-free, or upgrade to Vercel Pro.

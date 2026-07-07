@@ -26,6 +26,7 @@ export function AnswerForm({ postId, canPost }: { postId: string; canPost: boole
         id="answer-body"
         name="body"
         required
+        maxLength={8000}
         rows={4}
         className="rounded-xl border border-line bg-bg-soft p-3 text-sm"
         placeholder="Share what you know…"

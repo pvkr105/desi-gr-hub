@@ -30,13 +30,13 @@ app/            marketing pages + sitemap.ts, robots.ts, opengraph-image.tsx, no
   account/      sign-in / profile
   auth/callback/ OAuth + magic-link code exchange (route handler)
 components/      Header, Footer, StickyJoinBar, JoinButton, GroupCard, BusinessCard, QrCode, LogoMark,
-                CopyLinkButton, PageHeader, JsonLd, WeatherBanner, ForexIndicator, CurrencyConverter
+                CopyLinkButton, PageHeader, JsonLd, WeatherBanner, ForexIndicator, CurrencyConverter, AuthNav
   community/    PostCard, PostForm, VoteButtons, ReportButton, AnswerList, AnswerForm, AuthButtons
 data/           groups, faqs, announcements, events, guidelines, safety, newcomers, businesses, site  ← edit these
 lib/            types.ts (all interfaces), rates.ts (FX fetch), community.ts (board constants),
                 queries.ts (Supabase reads), supabase/{client,server,proxy-session}.ts
 proxy.ts        Supabase session refresh (Next 16's renamed middleware)
-supabase/       migrations/0001_init.sql (schema + RLS + triggers), SETUP.md
+supabase/       migrations/ (schema + RLS + triggers; apply all in order), SETUP.md
 ```
 
 ## Content-editing recipes

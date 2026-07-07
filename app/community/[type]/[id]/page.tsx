@@ -32,10 +32,13 @@ export async function generateMetadata({
 
 export default async function PostDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ type: string; id: string }>;
+  searchParams: Promise<{ error?: string }>;
 }) {
   const { type, id } = await params;
+  const { error } = await searchParams;
   if (!SEGMENT_TO_TYPE[type]) notFound();
 
   const post = await getPost(id);
@@ -82,6 +85,12 @@ export default async function PostDetailPage({
       )}
 
       <p className="mt-4 whitespace-pre-wrap leading-relaxed">{post.body}</p>
+
+      {error && (
+        <p className="glass mt-6 rounded-2xl border-saffron/60 p-4 text-sm text-saffron">
+          ⚠️ {error.slice(0, 200)}
+        </p>
+      )}
 
       {post.type === "question" ? (
         <QuestionThread post={post} canVote={canVote} canReport={canReport} path={currentPath} />

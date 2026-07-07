@@ -19,9 +19,10 @@ const ORDER: PostType[] = ["question", "housing", "marketplace"];
 export default async function NewPostPage({
   searchParams,
 }: {
-  searchParams: Promise<{ type?: string }>;
+  searchParams: Promise<{ type?: string; error?: string }>;
 }) {
-  const seg = (await searchParams).type ?? "questions";
+  const { type: segParam, error } = await searchParams;
+  const seg = segParam ?? "questions";
   const postType = SEGMENT_TO_TYPE[seg] ?? "question";
 
   const user = await getCurrentUser();
@@ -52,6 +53,12 @@ export default async function NewPostPage({
           );
         })}
       </div>
+
+      {error && (
+        <p className="glass mb-6 rounded-2xl border-saffron/60 p-4 text-sm text-saffron">
+          ⚠️ {error.slice(0, 200)}
+        </p>
+      )}
 
       <PostForm type={postType} />
     </>

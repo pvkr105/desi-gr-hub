@@ -54,6 +54,9 @@ export const EXPIRES: Record<PostType, boolean> = {
 
 export const DEFAULT_EXPIRY_DAYS = 30;
 
+/** Durations a member can pick for a listing (days). */
+export const EXPIRY_OPTIONS = [7, 14, 30, 60] as const;
+
 export function isPostType(v: string): v is PostType {
   return v === "question" || v === "housing" || v === "marketplace";
 }

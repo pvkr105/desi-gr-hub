@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { DEFAULT_EXPIRY_DAYS, EXPIRES, TYPE_TO_SEGMENT, isPostType } from "@/lib/community";
+import { DEFAULT_EXPIRY_DAYS, EXPIRY_OPTIONS, EXPIRES, TYPE_TO_SEGMENT, isPostType } from "@/lib/community";
 import type { PostType, TargetKind } from "@/lib/types";
 
 // Every action re-checks auth on the server — Server Actions are reachable via
@@ -21,6 +21,14 @@ function str(fd: FormData, key: string): string {
   return (fd.get(key) as string | null)?.trim() ?? "";
 }
 
+// DB errors (check constraints, rate-limit triggers) → messages a member can act on.
+function friendly(msg: string): string {
+  if (msg.includes("Rate limit")) return msg;
+  if (msg.includes("title")) return "Title must be 3–160 characters.";
+  if (msg.includes("body")) return "Details must be 1–8,000 characters.";
+  return "Couldn't save your post. Please try again.";
+}
+
 export async function createPost(formData: FormData) {
   const { supabase, user } = await requireUser();
 
@@ -28,8 +36,13 @@ export async function createPost(formData: FormData) {
   if (!isPostType(type)) throw new Error("Invalid post type");
 
   const price = str(formData, "price");
+  // Listings expire; the member picks the window (validated against the allow-list).
+  const picked = Number(str(formData, "duration"));
+  const durationDays = (EXPIRY_OPTIONS as readonly number[]).includes(picked)
+    ? picked
+    : DEFAULT_EXPIRY_DAYS;
   const expires_at = EXPIRES[type]
-    ? new Date(Date.now() + DEFAULT_EXPIRY_DAYS * 86400_000).toISOString()
+    ? new Date(Date.now() + durationDays * 86400_000).toISOString()
     : null;
 
   const { data, error } = await supabase
@@ -48,7 +61,13 @@ export async function createPost(formData: FormData) {
     .select("id")
     .single();
 
-  if (error) throw new Error(error.message);
+  // Redirect back to the form with a readable message instead of throwing —
+  // thrown action errors surface as an opaque digest page in production.
+  if (error) {
+    redirect(
+      `/community/new?type=${TYPE_TO_SEGMENT[type]}&error=${encodeURIComponent(friendly(error.message))}`,
+    );
+  }
 
   revalidatePath(`/community/${TYPE_TO_SEGMENT[type]}`);
   redirect(`/community/${TYPE_TO_SEGMENT[type]}/${data.id}`);
@@ -61,7 +80,9 @@ export async function addAnswer(formData: FormData) {
   if (!post_id || !body) throw new Error("Missing answer");
 
   const { error } = await supabase.from("answers").insert({ post_id, body, author_id: user.id });
-  if (error) throw new Error(error.message);
+  if (error) {
+    redirect(`/community/questions/${post_id}?error=${encodeURIComponent(friendly(error.message))}`);
+  }
 
   revalidatePath(`/community/questions/${post_id}`);
 }
