@@ -57,6 +57,25 @@ export const DEFAULT_EXPIRY_DAYS = 30;
 /** Durations a member can pick for a listing (days). */
 export const EXPIRY_OPTIONS = [7, 14, 30, 60] as const;
 
+/** Posts are editable for 24h after creation; after that, delete & repost. */
+export const EDIT_WINDOW_MS = 24 * 60 * 60 * 1000;
+
+export function canEdit(createdAt: string): boolean {
+  return Date.now() - new Date(createdAt).getTime() < EDIT_WINDOW_MS;
+}
+
+export const MAX_IMAGES = 4;
+
+/** Public URL prefix for the post-images bucket (both server & client see NEXT_PUBLIC). */
+export function imagePublicPrefix(): string {
+  return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/post-images/`;
+}
+
+/** Allow-list image URLs to our own bucket — blocks arbitrary/injected URLs. */
+export function isOurImageUrl(u: string): boolean {
+  return typeof u === "string" && u.startsWith(imagePublicPrefix());
+}
+
 export function isPostType(v: string): v is PostType {
   return v === "question" || v === "housing" || v === "marketplace";
 }

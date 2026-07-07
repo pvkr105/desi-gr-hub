@@ -91,10 +91,45 @@ export interface Post {
   status: PostStatus;
   score: number;
   details: Record<string, unknown>;
+  image_urls: string[];
   created_at: string;
+  updated_at: string | null;
   expires_at: string | null;
   /** Joined author profile (present when the query selects it). */
   author?: Profile | null;
+}
+
+// ---------- v3 admin-managed content (DB-backed, was data/*.ts) ----------
+
+export interface EventRow {
+  id: string;
+  title: string;
+  description: string;
+  /** ISO date, e.g. "2026-08-15". */
+  event_date: string;
+  event_time: string | null;
+  location: string;
+  map_url: string | null;
+  rsvp_url: string | null;
+  created_at: string;
+}
+
+export interface NewcomerEntryRow {
+  id: string;
+  section_id: string;
+  name: string;
+  detail: string;
+  url: string | null;
+  sort_order: number;
+}
+
+export interface NewcomerSectionRow {
+  id: string;
+  slug: string;
+  title: string;
+  intro: string;
+  sort_order: number;
+  entries: NewcomerEntryRow[];
 }
 
 export interface Answer {

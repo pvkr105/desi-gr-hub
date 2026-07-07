@@ -14,7 +14,7 @@ Key gotchas already hit on this project:
 ## What this is
 The public website for **Desi GR Hub**, a WhatsApp community for Indian & South Asian folks in Grand Rapids and West Michigan. The site is the community's front door: it explains the community, showcases each WhatsApp group with join links + QR codes, and hosts guidelines, safety, FAQ, a Newcomer's Guide, and a business directory. It also runs a **community board** (Reddit-style Q&A + housing/roommate listings + a buy/sell marketplace) and utility tools: an **events** page, a live **currency converter**, and a Grand Rapids **weather banner**.
 
-**Non-negotiables:** **mobile-first** (~95% of visitors are on phones via WhatsApp forwards) and **SEO-strong** (the community grows through search + shares). The **marketing pages stay fully static and free to host**; the *only* dynamic part is the **community board**, backed by **Supabase (free tier)** with auth + Row-Level Security. Keep that split clean — a marketing page must never depend on the database.
+**Non-negotiables:** **mobile-first** (~95% of visitors are on phones via WhatsApp forwards) and **SEO-strong** (the community grows through search + shares). The **static info pages** (home, groups, FAQ, guidelines, safety, businesses, announcements, contact) stay static and free to host. The **dynamic tier is Supabase-backed** (free tier, auth + Row-Level Security): the **community board**, plus **Events** and the **Newcomer's Guide** (now admin-managed in-site, server-rendered). Keep the split clean — a *static* info page must never depend on the database.
 
 ## Architecture at a glance
 - **Next.js 16 App Router + React 19 + TypeScript (strict) + Tailwind v4.**
@@ -23,28 +23,32 @@ The public website for **Desi GR Hub**, a WhatsApp community for Indian & South 
 - Marketing pages are statically generated. QR codes render to SVG **at build time** in the `QrCode` server component (`qrcode` package). Contact form is a plain HTML POST to **Formspree** (no backend).
 - **Two live client islands** fetch free, **keyless** public APIs in the browser — the HTML stays static, only the numbers hydrate: `WeatherBanner` (Open-Meteo) and the currency `ForexIndicator` / `CurrencyConverter` (fawazahmed0 rates, via `lib/rates.ts`).
 - **Community board** (`/community/*`, `/account`) is the dynamic tier: **Supabase** Postgres + Auth (Google OAuth + email magic link). **Row-Level Security is the authorization layer**; mutations go through **server actions** (`app/community/actions.ts`); the session cookie is refreshed in **`proxy.ts`**. Schema + policies live in `supabase/migrations/`. Setup: `supabase/SETUP.md`.
+- **Posts** support **image uploads** (≤4, compressed in-browser via `lib/image.ts` → the `post-images` Storage bucket; URLs allow-listed server-side) and a **24h edit window** (`canEdit` in `lib/community.ts`, `editPost` action); a **disclaimer modal** gates posting. **Events** + the **Newcomer's Guide** are admin-managed in-site via `app/admin-actions.ts` (gated by `is_admin`), rendered by `EventAdmin` / `NewcomerAdmin`.
 
 ```
-app/            marketing pages + sitemap.ts, robots.ts, opengraph-image.tsx, not-found.tsx
-  community/    board: landing, [type] list, [type]/[id] detail, new, actions.ts   ← DB-backed
+app/            static info pages + sitemap.ts, robots.ts, opengraph-image.tsx, not-found.tsx, error.tsx, goodbye/
+  community/    board: landing, [type] list, [type]/[id] detail (+ /edit), new, loading.tsx, actions.ts   ← DB-backed
+  events/, newcomers/  ← DB-backed, admin CRUD (ISR)
   account/      sign-in / profile
   auth/callback/ OAuth + magic-link code exchange (route handler)
+  admin-actions.ts  admin-only server actions (events + newcomer CRUD)
 components/      Header, Footer, StickyJoinBar, JoinButton, GroupCard, BusinessCard, QrCode, LogoMark,
-                CopyLinkButton, PageHeader, JsonLd, WeatherBanner, ForexIndicator, CurrencyConverter, AuthNav
+                CopyLinkButton, PageHeader, JsonLd, WeatherBanner, ForexIndicator, CurrencyConverter, AuthNav,
+                ContributeBanner, SignedOutOnly, EventAdmin, NewcomerAdmin
   community/    PostCard, PostForm, VoteButtons, ReportButton, AnswerList, AnswerForm, AuthButtons
-data/           groups, faqs, announcements, events, guidelines, safety, newcomers, businesses, site  ← edit these
-lib/            types.ts (all interfaces), rates.ts (FX fetch), community.ts (board constants),
-                queries.ts (Supabase reads), supabase/{client,server,proxy-session}.ts
+data/           groups, faqs, announcements, guidelines, safety, businesses, site  ← edit these
+                (events, newcomers remain only as DB seed/reference)
+lib/            types.ts (all interfaces), rates.ts (FX fetch), community.ts (board constants + edit window/images),
+                image.ts (browser compress), queries.ts (Supabase reads), supabase/{client,server,proxy-session}.ts
 proxy.ts        Supabase session refresh (Next 16's renamed middleware)
-supabase/       migrations/ (schema + RLS + triggers; apply all in order), SETUP.md
+supabase/       migrations/ (schema + RLS + triggers + storage bucket; apply all in order), SETUP.md
 ```
 
 ## Content-editing recipes
 - **Add a group:** append a `Group` to `data/groups.ts`. `joinUrl: null` renders a "Join via the main hub" button; the detail page and QR code fall back to the main hub. Detail page + sitemap update automatically.
 - **Add an announcement:** prepend an `Announcement` (ISO `date`) to `data/announcements.ts` (newest first).
-- **Add an event:** prepend an `Event` (ISO `date`) to `data/events.ts`; the page splits upcoming/past and emits Event JSON-LD automatically.
+- **Events & Newcomer's Guide are now DB-backed** (Supabase, admin-managed in-site — not `data/*.ts`). Sign in as an admin and use the add/edit/delete controls on `/events` and `/newcomers`. Both pages are server-rendered with ISR (still SEO-indexable). `data/events.ts` / `data/newcomers.ts` remain only as the migration seed/reference. `/events` also has "Happening today" + upcoming/past and emits Event JSON-LD.
 - **Add an FAQ:** append a `Faq` to `data/faqs.ts` — also feeds the FAQPage JSON-LD.
-- **Newcomer's Guide:** edit sections/entries in `data/newcomers.ts` (currently placeholder content marked for admin review).
 - **Business listing:** add a `Business` to `data/businesses.ts` (admin-curated; requests arrive via the contact form).
 - **Global settings** (site URL, main hub link, Formspree ID): `data/site.ts`.
 - **Weather / currency:** no data file — they're code-only client islands fetching live APIs. Tune the currency source in `lib/rates.ts`, board constants (categories, expiry) in `lib/community.ts`.

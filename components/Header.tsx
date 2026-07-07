@@ -9,11 +9,10 @@ import { site } from "@/data/site";
 
 // Primary nav shown in the header. Full set lives in the footer.
 const navLinks = [
-  { href: "/community", label: "Community" },
+  { href: "/community", label: "Community Board" },
   { href: "/groups", label: "Groups" },
   { href: "/events", label: "Events" },
   { href: "/newcomers", label: "Newcomers" },
-  { href: "/currency", label: "Currency" },
   { href: "/contact", label: "Contact" },
 ];
 

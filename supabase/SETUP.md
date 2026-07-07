@@ -9,14 +9,18 @@ Google OAuth. Everything else is already in the repo. ~15 minutes, all free tier
 3. Save the database password somewhere.
 
 ## 2. Apply the schema
-Run **every file in `supabase/migrations/` in filename order** (`0001_…` then `0002_…`).
+Run **every file in `supabase/migrations/` in filename order** (`0001_…`, `0002_…`, `0003_…`).
 Two options:
 - **SQL editor (easiest):** open the project's SQL editor, paste each migration file
   in order, and run it.
 - **CLI:** `npx supabase link --project-ref <ref>` then `npx supabase db push` (applies all).
 
 This creates the tables, RLS policies, and triggers (auto-profile on signup,
-post + answer rate-limits, vote scoring).
+post + answer rate-limits, vote scoring), the **events** and **newcomer guide** tables
+(admin-managed in-site), the post **image** columns, and the **`post-images`** Storage
+bucket + its access policies (`0003` creates the bucket via SQL — no manual step needed;
+if your project blocks `insert into storage.buckets`, create a public bucket named
+`post-images` in the dashboard **Storage** tab instead, then re-run the policy statements).
 
 ## 3. Get your API keys
 Project → **Settings → API**. Copy:

@@ -1,7 +1,14 @@
 import "server-only";
 import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
-import type { Answer, Post, PostType, Profile } from "@/lib/types";
+import type {
+  Answer,
+  EventRow,
+  NewcomerSectionRow,
+  Post,
+  PostType,
+  Profile,
+} from "@/lib/types";
 
 const AUTHOR = "author:profiles(id,display_name,avatar_url,is_admin)";
 
@@ -76,6 +83,26 @@ export async function getMyVotes(
   const map: Record<string, number> = {};
   for (const v of data ?? []) map[(v as { target_id: string }).target_id] = (v as { value: number }).value;
   return map;
+}
+
+/** All events, newest-dated first. Admin-managed (was data/events.ts). */
+export async function listEvents(): Promise<EventRow[]> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+  const supabase = await createClient();
+  const { data } = await supabase.from("events").select("*").order("event_date", { ascending: false });
+  return (data as EventRow[]) ?? [];
+}
+
+/** Newcomer guide: sections with their nested entries, ordered. */
+export async function listNewcomerSections(): Promise<NewcomerSectionRow[]> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("newcomer_sections")
+    .select("*, entries:newcomer_entries(*)")
+    .order("sort_order", { ascending: true })
+    .order("sort_order", { referencedTable: "newcomer_entries", ascending: true });
+  return (data as NewcomerSectionRow[]) ?? [];
 }
 
 /** All recent question ids, for the sitemap. */

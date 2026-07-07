@@ -10,9 +10,7 @@ All of the site's content lives in plain text files in `data/`. Edit the right f
 |---|---|
 | A WhatsApp group (name, description, invite link) | `data/groups.ts` |
 | Announcements | `data/announcements.ts` (newest goes on top) |
-| Events & meetups | `data/events.ts` (newest goes on top) |
 | FAQ questions and answers | `data/faqs.ts` |
-| Newcomer's Guide | `data/newcomers.ts` ⚠️ still has sample content to replace |
 | Business directory listings | `data/businesses.ts` ⚠️ still has sample content to replace |
 | Guidelines / safety text | `data/guidelines.ts`, `data/safety.ts` |
 | Site address, main hub link, contact-form ID | `data/site.ts` |
@@ -33,7 +31,8 @@ The board is the one part of the site that needs a backend. It runs on **Supabas
 
 - **To turn it on:** follow **[supabase/SETUP.md](./supabase/SETUP.md)** — create a free Supabase project, run the migrations, enable Google + email sign-in, and paste three keys into `.env.local` (locally) and Vercel's env settings (in production). ~15 minutes.
 - **Until you do,** the site still builds and every static page works; the board simply shows sign-in / empty states.
-- **Moderating:** make yourself an admin (one SQL line in `supabase/SETUP.md`), then you can delete or close any post and see reported items. Housing and marketplace listings auto-expire after 30 days.
+- **Moderating:** make yourself an admin (one SQL line in `supabase/SETUP.md`), then you can delete or close any post and see reported items. As an admin you also **add/edit/delete Events and Newcomer's Guide entries directly on `/events` and `/newcomers`** — no code needed.
+- **Posts** can include up to 4 photos (compressed in the browser before upload) and are **editable for 24 hours**, after which the author deletes and reposts. Housing/marketplace listings auto-expire after the duration the poster chose (7–60 days).
 - **Cost note:** Vercel's free tier is **non-commercial** — keep the board free and ad-free, or upgrade to Vercel Pro.
 
 ## Publish it (Vercel, free)

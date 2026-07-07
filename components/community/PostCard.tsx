@@ -23,6 +23,16 @@ export function PostCard({ post }: { post: Post }) {
         )}
       </div>
 
+      {post.image_urls?.length > 0 && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={post.image_urls[0]}
+          alt=""
+          loading="lazy"
+          className="mb-3 h-40 w-full rounded-xl object-cover"
+        />
+      )}
+
       {price && <p className="gradient-text text-xl font-bold">{price}</p>}
 
       <div className="mt-auto flex flex-wrap items-center gap-2 pt-1 text-xs text-muted">

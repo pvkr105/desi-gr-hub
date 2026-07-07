@@ -36,7 +36,10 @@ export function Footer() {
           <ul className="mt-2 space-y-1.5">
             {groups.map((g) => (
               <li key={g.slug}>
-                <Link href={`/groups/${g.slug}`} className="text-sm text-muted hover:text-ink">
+                <Link
+                  href={`/groups/${g.slug}`}
+                  className="text-sm text-muted transition-colors hover:text-saffron"
+                >
                   {g.emoji} {g.name}
                 </Link>
               </li>
@@ -48,7 +51,10 @@ export function Footer() {
           <ul className="mt-2 space-y-1.5">
             {pageLinks.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="text-sm text-muted hover:text-ink">
+                <Link
+                  href={l.href}
+                  className="text-sm text-muted transition-colors hover:text-saffron"
+                >
                   {l.label}
                 </Link>
               </li>

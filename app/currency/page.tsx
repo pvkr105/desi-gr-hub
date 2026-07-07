@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { CurrencyConverter } from "@/components/CurrencyConverter";
+import { ContributeBanner } from "@/components/ContributeBanner";
 
 export const metadata: Metadata = {
   title: "USD to INR Currency Converter",
@@ -34,6 +35,8 @@ export default function CurrencyPage() {
           the final amount with your provider before sending money.
         </p>
       </section>
+
+      <ContributeBanner />
     </>
   );
 }

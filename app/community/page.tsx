@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/PageHeader";
+import { ContributeBanner } from "@/components/ContributeBanner";
+import { SignedOutOnly } from "@/components/SignedOutOnly";
 import { TYPE_META, TYPE_TO_SEGMENT } from "@/lib/community";
 import { communityDisclaimer } from "@/data/safety";
 import type { PostType } from "@/lib/types";
@@ -46,13 +48,17 @@ export default function CommunityPage() {
         <p className="text-sm text-muted">{communityDisclaimer}</p>
       </div>
 
-      <p className="mt-6 text-sm text-muted">
-        Want to post?{" "}
-        <Link href="/account?next=/community" className="text-saffron underline underline-offset-2">
-          Sign in
-        </Link>{" "}
-        with Google or your email, it&apos;s free.
-      </p>
+      <SignedOutOnly>
+        <p className="mt-6 text-sm text-muted">
+          Want to post?{" "}
+          <Link href="/account?next=/community" className="text-saffron underline underline-offset-2">
+            Sign in
+          </Link>{" "}
+          with Google or your email, it&apos;s free.
+        </p>
+      </SignedOutOnly>
+
+      <ContributeBanner />
     </>
   );
 }

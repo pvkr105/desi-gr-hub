@@ -3,7 +3,16 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { DEFAULT_EXPIRY_DAYS, EXPIRY_OPTIONS, EXPIRES, TYPE_TO_SEGMENT, isPostType } from "@/lib/community";
+import {
+  DEFAULT_EXPIRY_DAYS,
+  EXPIRY_OPTIONS,
+  EXPIRES,
+  MAX_IMAGES,
+  TYPE_TO_SEGMENT,
+  canEdit,
+  isOurImageUrl,
+  isPostType,
+} from "@/lib/community";
 import type { PostType, TargetKind } from "@/lib/types";
 
 // Every action re-checks auth on the server — Server Actions are reachable via
@@ -29,11 +38,46 @@ function friendly(msg: string): string {
   return "Couldn't save your post. Please try again.";
 }
 
+// Required-field check. All fields shown for the type are required, except contact
+// is optional on questions. Returns an error message, or null when valid.
+function missingField(type: PostType, fd: FormData): string | null {
+  if (!str(fd, "title")) return "Title is required.";
+  if (!str(fd, "category")) return "Please pick a category.";
+  if (!str(fd, "body")) return "Details are required.";
+  if (type !== "question" && !str(fd, "contact")) return "Contact info is required.";
+  if (EXPIRES[type]) {
+    const price = str(fd, "price");
+    if (price === "" || Number.isNaN(Number(price)) || Number(price) < 0) {
+      return "A price is required (enter 0 for free).";
+    }
+    if (!str(fd, "location")) return "Location is required.";
+  }
+  return null;
+}
+
+// Parse the hidden image_urls field (JSON array) and allow-list to our bucket.
+function parseImages(fd: FormData): string[] {
+  const raw = str(fd, "image_urls");
+  if (!raw) return [];
+  try {
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr)) return [];
+    return arr.filter((u): u is string => isOurImageUrl(u)).slice(0, MAX_IMAGES);
+  } catch {
+    return [];
+  }
+}
+
 export async function createPost(formData: FormData) {
   const { supabase, user } = await requireUser();
 
   const type = str(formData, "type") as PostType;
   if (!isPostType(type)) throw new Error("Invalid post type");
+
+  const invalid = missingField(type, formData);
+  if (invalid) {
+    redirect(`/community/new?type=${TYPE_TO_SEGMENT[type]}&error=${encodeURIComponent(invalid)}`);
+  }
 
   const price = str(formData, "price");
   // Listings expire; the member picks the window (validated against the allow-list).
@@ -56,6 +100,7 @@ export async function createPost(formData: FormData) {
       contact: str(formData, "contact") || null,
       price: price ? Number(price) : null,
       location: str(formData, "location") || null,
+      image_urls: parseImages(formData),
       expires_at,
     })
     .select("id")
@@ -71,6 +116,52 @@ export async function createPost(formData: FormData) {
 
   revalidatePath(`/community/${TYPE_TO_SEGMENT[type]}`);
   redirect(`/community/${TYPE_TO_SEGMENT[type]}/${data.id}`);
+}
+
+export async function editPost(formData: FormData) {
+  const { supabase, user } = await requireUser();
+  const id = str(formData, "id");
+  const type = str(formData, "type") as PostType;
+  if (!isPostType(type)) throw new Error("Invalid post type");
+  const seg = TYPE_TO_SEGMENT[type];
+
+  const { data: post } = await supabase
+    .from("posts")
+    .select("author_id, created_at")
+    .eq("id", id)
+    .maybeSingle();
+  if (!post) redirect(`/community/${seg}`);
+  // Ownership + 24h window (RLS is the second gate).
+  if (post.author_id !== user.id) redirect(`/community/${seg}/${id}`);
+  if (!canEdit(post.created_at)) {
+    redirect(
+      `/community/${seg}/${id}?error=${encodeURIComponent(
+        "The 24-hour editing window has closed — please delete and repost.",
+      )}`,
+    );
+  }
+
+  const invalid = missingField(type, formData);
+  if (invalid) redirect(`/community/${seg}/${id}/edit?error=${encodeURIComponent(invalid)}`);
+
+  const price = str(formData, "price");
+  const { error } = await supabase
+    .from("posts")
+    .update({
+      category: str(formData, "category") || null,
+      title: str(formData, "title"),
+      body: str(formData, "body"),
+      contact: str(formData, "contact") || null,
+      price: price ? Number(price) : null,
+      location: str(formData, "location") || null,
+      image_urls: parseImages(formData),
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", id);
+  if (error) redirect(`/community/${seg}/${id}/edit?error=${encodeURIComponent(friendly(error.message))}`);
+
+  revalidatePath(`/community/${seg}/${id}`);
+  redirect(`/community/${seg}/${id}`);
 }
 
 export async function addAnswer(formData: FormData) {
@@ -126,6 +217,15 @@ export async function reportContent(formData: FormData) {
   revalidatePath(str(formData, "path") || "/community");
 }
 
+// useActionState wrapper so the Report button can show "Reported ✓" feedback.
+export async function reportAndAck(
+  _prev: { done: boolean },
+  formData: FormData,
+): Promise<{ done: boolean }> {
+  await reportContent(formData);
+  return { done: true };
+}
+
 export async function closePost(formData: FormData) {
   const { supabase } = await requireUser();
   const id = str(formData, "id");
@@ -146,5 +246,5 @@ export async function deletePost(formData: FormData) {
 export async function signOut() {
   const supabase = await createClient();
   await supabase.auth.signOut();
-  redirect("/");
+  redirect("/goodbye");
 }

@@ -48,7 +48,7 @@ export default function HomePage() {
         </p>
         <div className="mt-6 flex flex-wrap items-center gap-3">
           <JoinButton href={site.mainHubUrl}>Join the Community</JoinButton>
-          <Link href="/groups" className="min-h-11 rounded-full border border-line px-5 py-2.5 text-sm font-medium hover:border-saffron">
+          <Link href="/groups" className="min-h-11 rounded-full border border-line px-5 py-2.5 text-sm font-medium transition-colors hover:border-saffron hover:text-saffron">
             Browse groups
           </Link>
         </div>
@@ -109,7 +109,7 @@ export default function HomePage() {
           <p className="text-sm text-muted">
             Desi GR Hub is community-run and unofficial. Please participate at your own discretion and
             verify people and listings before any arrangement.{" "}
-            <Link href="/safety" className="text-saffron underline underline-offset-2">
+            <Link href="/safety" className="text-saffron underline underline-offset-2 transition-colors hover:text-saffron/80">
               Read our safety &amp; disclaimers →
             </Link>
           </p>

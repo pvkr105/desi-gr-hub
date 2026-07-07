@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPost, getCurrentUser, listAnswers, getMyVotes } from "@/lib/queries";
-import { SEGMENT_TO_TYPE, TYPE_TO_SEGMENT, TYPE_META, formatPrice, timeAgo } from "@/lib/community";
+import Link from "next/link";
+import { SEGMENT_TO_TYPE, TYPE_TO_SEGMENT, TYPE_META, formatPrice, timeAgo, canEdit } from "@/lib/community";
 import { closePost, deletePost } from "@/app/community/actions";
 import type { Post } from "@/lib/types";
 import { JsonLd } from "@/components/JsonLd";
@@ -86,6 +87,17 @@ export default async function PostDetailPage({
 
       <p className="mt-4 whitespace-pre-wrap leading-relaxed">{post.body}</p>
 
+      {post.image_urls?.length > 0 && (
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {post.image_urls.map((url) => (
+            <a key={url} href={url} target="_blank" rel="noopener noreferrer">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={url} alt="" loading="lazy" className="w-full rounded-xl" />
+            </a>
+          ))}
+        </div>
+      )}
+
       {error && (
         <p className="glass mt-6 rounded-2xl border-saffron/60 p-4 text-sm text-saffron">
           ⚠️ {error.slice(0, 200)}
@@ -132,6 +144,14 @@ export default async function PostDetailPage({
           path={currentPath}
           canReport={canReport}
         />
+        {isOwner && canEdit(post.created_at) && (
+          <Link
+            href={`${currentPath}/edit`}
+            className="inline-flex min-h-11 items-center rounded-xl border border-line px-4 text-sm font-medium text-muted hover:border-saffron"
+          >
+            Edit
+          </Link>
+        )}
         {(isOwner || isAdmin) && post.status !== "closed" && (
           <form action={closePost}>
             <input type="hidden" name="id" value={post.id} />

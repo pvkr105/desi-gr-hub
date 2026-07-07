@@ -20,6 +20,31 @@ export default function ContactPage() {
       <Suspense fallback={<div className="glass h-96 max-w-xl rounded-2xl" />}>
         <ContactForm />
       </Suspense>
+
+      <div className="glass mt-8 max-w-xl rounded-2xl p-6">
+        <h2 className="font-display text-lg font-bold">🛠️ Open source</h2>
+        <p className="mt-2 text-sm text-muted">
+          Desi GR Hub is open source — fork it and run one for your own community.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-4 text-sm font-medium">
+          <a
+            href="https://github.com/pvkr105/desi-gr-hub"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-saffron transition-colors hover:text-saffron/80"
+          >
+            View on GitHub →
+          </a>
+          <a
+            href="https://github.com/pvkr105/desi-gr-hub"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-saffron transition-colors hover:text-saffron/80"
+          >
+            ⭐ Star us on GitHub
+          </a>
+        </div>
+      </div>
     </>
   );
 }

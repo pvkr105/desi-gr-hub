@@ -6,6 +6,7 @@ import { SEGMENT_TO_TYPE, TYPE_META, CATEGORIES } from "@/lib/community";
 import { communityDisclaimer } from "@/data/safety";
 import { PageHeader } from "@/components/PageHeader";
 import { PostCard } from "@/components/community/PostCard";
+import { ContributeBanner } from "@/components/ContributeBanner";
 
 export const dynamic = "force-dynamic";
 
@@ -128,6 +129,8 @@ export default async function CommunityTypePage({
       <div className="glass mt-8 rounded-2xl border-line p-4 text-xs text-muted">
         {communityDisclaimer}
       </div>
+
+      <ContributeBanner />
     </>
   );
 }
