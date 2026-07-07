@@ -5,11 +5,15 @@ import { GroupCard } from "@/components/GroupCard";
 import { JoinButton } from "@/components/JoinButton";
 import { JsonLd } from "@/components/JsonLd";
 import { ForexIndicator } from "@/components/ForexIndicator";
+import { TYPE_META, TYPE_TO_SEGMENT } from "@/lib/community";
+import type { PostType } from "@/lib/types";
+
+const boardTypes: PostType[] = ["question", "housing", "marketplace"];
 
 const steps = [
   { n: "1", title: "Join the hub", body: "Tap Join to open Desi GR Hub in WhatsApp and join the main community." },
-  { n: "2", title: "Pick your groups", body: "Add the groups you need: rides, accommodation, marketplace, or Q&A." },
-  { n: "3", title: "Connect & help", body: "Ask questions, share rides, find housing, and help fellow desis in GR." },
+  { n: "2", title: "Pick your groups", body: "Add the WhatsApp groups you need for rides, accommodation, and more." },
+  { n: "3", title: "Use the board", body: "No WhatsApp required, ask questions, find housing & roommates, and buy or sell right here on the Community Board." },
 ];
 
 export default function HomePage() {
@@ -56,6 +60,36 @@ export default function HomePage() {
           <ForexIndicator />
         </div>
         <p className="mt-6 max-w-2xl text-sm text-muted">{site.mainHubBlurb}</p>
+      </section>
+
+      {/* Community Board — surfaced above groups so visitors notice it immediately */}
+      <section className="py-8">
+        <div className="flex items-end justify-between gap-3">
+          <div>
+            <h2 className="font-display text-2xl font-bold">Community Board</h2>
+            <p className="mt-1 text-muted">Ask questions, find housing &amp; roommates, and buy or sell, free for everyone in GR.</p>
+          </div>
+          <Link href="/community" className="hidden shrink-0 text-sm text-saffron transition-colors hover:text-saffron/80 sm:inline">
+            Open the board →
+          </Link>
+        </div>
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          {boardTypes.map((t) => {
+            const m = TYPE_META[t];
+            return (
+              <Link
+                key={t}
+                href={`/community/${TYPE_TO_SEGMENT[t]}`}
+                className="glass rounded-2xl p-5 transition-transform hover:-translate-y-0.5"
+              >
+                <div className="text-2xl" aria-hidden>{m.emoji}</div>
+                <h3 className="mt-2 font-display font-bold">{m.label}</h3>
+                <p className="mt-1 text-sm text-muted">{m.blurb}</p>
+                <span className="mt-3 inline-block text-sm text-saffron">Open →</span>
+              </Link>
+            );
+          })}
+        </div>
       </section>
 
       {/* Groups */}
