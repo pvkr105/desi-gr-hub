@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { businesses } from "@/data/businesses";
+import { listBusinesses, getCurrentUser } from "@/lib/queries";
 import { getGroup } from "@/data/groups";
 import { PageHeader } from "@/components/PageHeader";
 import { BusinessCard } from "@/components/BusinessCard";
+import { BusinessAdmin } from "@/components/BusinessAdmin";
 import { JoinButton } from "@/components/JoinButton";
 import { site } from "@/data/site";
 
@@ -14,8 +15,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/businesses" },
 };
 
-export default function BusinessesPage() {
+export const revalidate = 300;
+
+export default async function BusinessesPage() {
+  const businesses = await listBusinesses();
+  const user = await getCurrentUser();
+  const isAdmin = !!user?.profile?.is_admin;
   const promo = getGroup("gr-promotions-marketplace");
+
   return (
     <>
       <PageHeader
@@ -23,11 +30,26 @@ export default function BusinessesPage() {
         intro="A curated list of desi-owned businesses serving Grand Rapids and West Michigan. Listings are community-curated and admin-approved, they are not endorsed or vetted."
       />
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        {businesses.map((b) => (
-          <BusinessCard key={b.name} business={b} />
-        ))}
-      </div>
+      {isAdmin && <BusinessAdmin businesses={businesses} />}
+
+      {businesses.length === 0 ? (
+        <p className="text-muted">No businesses listed yet, check back soon!</p>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2">
+          {businesses.map((b) => (
+            <BusinessCard
+              key={b.id}
+              business={{
+                name: b.name,
+                category: b.category,
+                description: b.description,
+                contactUrl: b.contact_url,
+                contactLabel: b.contact_label,
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Get listed CTA */}
       <div className="mt-8 grid gap-4 sm:grid-cols-2">

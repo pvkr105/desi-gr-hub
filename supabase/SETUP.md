@@ -1,7 +1,6 @@
-# v2 Community Board — setup
+# Supabase setup — community board + admin-managed content
 
-The community board (Q&A, housing, marketplace) needs a free Supabase project +
-Google OAuth. Everything else is already in the repo. ~15 minutes, all free tiers.
+The community board (Q&A, housing, marketplace) + admin-managed content (Announcements, FAQs, Guidelines, Safety Disclaimers, Businesses, Events, Newcomer's Guide) need a free Supabase project + Google OAuth. Everything else is already in the repo. ~15 minutes, all free tiers.
 
 ## 1. Create a Supabase project
 1. Sign up at https://supabase.com → **New project** (free tier).
@@ -9,7 +8,7 @@ Google OAuth. Everything else is already in the repo. ~15 minutes, all free tier
 3. Save the database password somewhere.
 
 ## 2. Apply the schema
-Run **every file in `supabase/migrations/` in filename order** (`0001_…`, `0002_…`, `0003_…`, `0004_…`).
+Run **every file in `supabase/migrations/` in filename order** (`0001_…`, `0002_…`, `0003_…`, `0004_…`, `0005_…`).
 Two options:
 - **SQL editor (easiest):** open the project's SQL editor, paste each migration file
   in order, and run it.
@@ -17,9 +16,10 @@ Two options:
 
 This creates:
 - Tables, RLS policies, and triggers: auto-profile on signup, post + answer rate-limits, vote scoring.
-- **Events** and **newcomer guide** tables (admin-managed in-site via `/events` and `/newcomers`).
+- **Events**, **Newcomer's Guide**, **Announcements**, **FAQs**, **Guidelines**, **Safety Disclaimers**, **Businesses** tables (all admin-managed in-site via their respective pages).
 - Post **image** columns and the **`post-images`** Storage bucket + its access policies (`0003`; create it manually if your project blocks `insert into storage.buckets`).
 - **Moderation** (`0004`): `profiles.can_moderate_reports`, `profiles.notify_on_report`, `reports.status`, and new RLS policies so moderators can read/update reports and moderate content (close/delete posts/answers).
+- **Content Admin** (`0005`): tables for announcements, faqs, guidelines, safety_disclaimers, businesses with public read access and admin-only write access via RLS.
 
 ## 3. Get your API keys
 Project → **Settings → API**. Copy:
@@ -68,7 +68,8 @@ Both roles see the moderation queue at `/admin`, can toggle email alerts for new
 - Vercel Hobby is free but **non-commercial** — keep the board free/no-ads or upgrade to Pro.
 
 ## Notes
-- Without env vars, the site still builds and all static pages work; the community
-  section simply shows empty/sign-in states (fetches are guarded).
+- Without env vars, the site still builds and all pages work; the community
+  section and admin-managed content pages simply show empty/sign-in states (fetches are guarded).
 - Free-tier Supabase pauses after ~1 week of no activity (first request then cold-starts).
-- Listings auto-expire after 30 days (filtered at read time — no cleanup job needed).
+- Community board listings auto-expire after 30 days (filtered at read time — no cleanup job needed).
+- Admin-managed content pages use ISR with 5-minute revalidation (changes appear within 5min on the live site).

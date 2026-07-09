@@ -134,6 +134,47 @@ export interface NewcomerSectionRow {
   entries: NewcomerEntryRow[];
 }
 
+export interface AnnouncementRow {
+  id: string;
+  date: string;
+  title: string;
+  body: string;
+  created_at: string;
+}
+
+export interface FaqRow {
+  id: string;
+  question: string;
+  answer: string;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface GuidelineRow {
+  id: string;
+  title: string;
+  detail: string;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface SafetyDisclaimerRow {
+  id: string;
+  text: string;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface BusinessRow {
+  id: string;
+  name: string;
+  category: BusinessCategory;
+  description: string;
+  contact_url: string;
+  contact_label: string;
+  created_at: string;
+}
+
 export interface Answer {
   id: string;
   post_id: string;

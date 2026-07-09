@@ -2,14 +2,19 @@ import "server-only";
 import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
 import type {
+  AnnouncementRow,
   Answer,
+  BusinessRow,
   EventRow,
+  FaqRow,
+  GuidelineRow,
   NewcomerSectionRow,
   Post,
   PostType,
   Profile,
   Report,
   ReportGroup,
+  SafetyDisclaimerRow,
 } from "@/lib/types";
 
 const AUTHOR = "author:profiles(id,display_name,avatar_url,is_admin)";
@@ -197,4 +202,59 @@ export async function listModerators(): Promise<Profile[]> {
     .order("is_admin", { ascending: false })
     .order("display_name", { ascending: true });
   return (data as Profile[]) ?? [];
+}
+
+/** All announcements, newest first. */
+export async function listAnnouncements(): Promise<AnnouncementRow[]> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("announcements")
+    .select("*")
+    .order("date", { ascending: false });
+  return (data as AnnouncementRow[]) ?? [];
+}
+
+/** All FAQs, by sort order. */
+export async function listFaqs(): Promise<FaqRow[]> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("faqs")
+    .select("*")
+    .order("sort_order", { ascending: true });
+  return (data as FaqRow[]) ?? [];
+}
+
+/** All guidelines, by sort order. */
+export async function listGuidelines(): Promise<GuidelineRow[]> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("guidelines")
+    .select("*")
+    .order("sort_order", { ascending: true });
+  return (data as GuidelineRow[]) ?? [];
+}
+
+/** All safety disclaimers, by sort order. */
+export async function listSafetyDisclaimers(): Promise<SafetyDisclaimerRow[]> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("safety_disclaimers")
+    .select("*")
+    .order("sort_order", { ascending: true });
+  return (data as SafetyDisclaimerRow[]) ?? [];
+}
+
+/** All businesses. */
+export async function listBusinesses(): Promise<BusinessRow[]> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("businesses")
+    .select("*")
+    .order("created_at", { ascending: true });
+  return (data as BusinessRow[]) ?? [];
 }

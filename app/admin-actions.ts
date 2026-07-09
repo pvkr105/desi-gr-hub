@@ -240,3 +240,155 @@ export async function updateTeamMember(formData: FormData) {
 
   revalidatePath("/admin/team");
 }
+
+// ---------- Announcements ----------
+export async function createAnnouncement(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase.from("announcements").insert({
+    date: str(formData, "date"),
+    title: str(formData, "title"),
+    body: str(formData, "body"),
+  });
+  revalidatePath("/announcements");
+}
+
+export async function updateAnnouncement(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase
+    .from("announcements")
+    .update({
+      date: str(formData, "date"),
+      title: str(formData, "title"),
+      body: str(formData, "body"),
+    })
+    .eq("id", str(formData, "id"));
+  revalidatePath("/announcements");
+}
+
+export async function deleteAnnouncement(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase.from("announcements").delete().eq("id", str(formData, "id"));
+  revalidatePath("/announcements");
+}
+
+// ---------- FAQs ----------
+export async function createFaq(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase.from("faqs").insert({
+    question: str(formData, "question"),
+    answer: str(formData, "answer"),
+    sort_order: num(formData, "sort_order"),
+  });
+  revalidatePath("/faq");
+}
+
+export async function updateFaq(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase
+    .from("faqs")
+    .update({
+      question: str(formData, "question"),
+      answer: str(formData, "answer"),
+      sort_order: num(formData, "sort_order"),
+    })
+    .eq("id", str(formData, "id"));
+  revalidatePath("/faq");
+}
+
+export async function deleteFaq(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase.from("faqs").delete().eq("id", str(formData, "id"));
+  revalidatePath("/faq");
+}
+
+// ---------- Guidelines ----------
+export async function createGuideline(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase.from("guidelines").insert({
+    title: str(formData, "title"),
+    detail: str(formData, "detail"),
+    sort_order: num(formData, "sort_order"),
+  });
+  revalidatePath("/guidelines");
+}
+
+export async function updateGuideline(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase
+    .from("guidelines")
+    .update({
+      title: str(formData, "title"),
+      detail: str(formData, "detail"),
+      sort_order: num(formData, "sort_order"),
+    })
+    .eq("id", str(formData, "id"));
+  revalidatePath("/guidelines");
+}
+
+export async function deleteGuideline(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase.from("guidelines").delete().eq("id", str(formData, "id"));
+  revalidatePath("/guidelines");
+}
+
+// ---------- Safety Disclaimers ----------
+export async function createSafetyDisclaimer(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase.from("safety_disclaimers").insert({
+    text: str(formData, "text"),
+    sort_order: num(formData, "sort_order"),
+  });
+  revalidatePath("/safety");
+}
+
+export async function updateSafetyDisclaimer(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase
+    .from("safety_disclaimers")
+    .update({
+      text: str(formData, "text"),
+      sort_order: num(formData, "sort_order"),
+    })
+    .eq("id", str(formData, "id"));
+  revalidatePath("/safety");
+}
+
+export async function deleteSafetyDisclaimer(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase.from("safety_disclaimers").delete().eq("id", str(formData, "id"));
+  revalidatePath("/safety");
+}
+
+// ---------- Businesses ----------
+export async function createBusiness(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase.from("businesses").insert({
+    name: str(formData, "name"),
+    category: str(formData, "category"),
+    description: str(formData, "description"),
+    contact_url: str(formData, "contact_url"),
+    contact_label: str(formData, "contact_label"),
+  });
+  revalidatePath("/businesses");
+}
+
+export async function updateBusiness(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase
+    .from("businesses")
+    .update({
+      name: str(formData, "name"),
+      category: str(formData, "category"),
+      description: str(formData, "description"),
+      contact_url: str(formData, "contact_url"),
+      contact_label: str(formData, "contact_label"),
+    })
+    .eq("id", str(formData, "id"));
+  revalidatePath("/businesses");
+}
+
+export async function deleteBusiness(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase.from("businesses").delete().eq("id", str(formData, "id"));
+  revalidatePath("/businesses");
+}
