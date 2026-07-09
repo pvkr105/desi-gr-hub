@@ -71,7 +71,7 @@ export function Header() {
             </Link>
           ))}
           <div className="mt-2 border-t border-line pt-3" onClick={(e) => { if (e.target === e.currentTarget) setOpen(false); }}>
-            <AuthNav />
+            <AuthNav onNavigate={() => setOpen(false)} />
           </div>
         </nav>
       )}

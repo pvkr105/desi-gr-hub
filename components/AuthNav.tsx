@@ -17,7 +17,7 @@ function firstName(user: User | null): string | null {
   return user.email?.split("@")[0] ?? "there";
 }
 
-export function AuthNav() {
+export function AuthNav({ onNavigate }: { onNavigate?: () => void } = {}) {
   const [name, setName] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
 
@@ -42,6 +42,7 @@ export function AuthNav() {
     return (
       <Link
         href="/account"
+        onClick={onNavigate}
         className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-sm font-medium hover:border-saffron"
       >
         Sign in
