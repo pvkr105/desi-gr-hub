@@ -130,7 +130,10 @@ export default async function PostDetailPage({
             </>
           ) : (
             <p className="mt-3 text-sm text-muted">
-              <Link href="/account?next={currentPath}" className="text-saffron underline underline-offset-2">
+              <Link
+                href={`/account?next=${encodeURIComponent(currentPath)}`}
+                className="text-saffron underline underline-offset-2"
+              >
                 Sign in
               </Link>{" "}
               to see contact info

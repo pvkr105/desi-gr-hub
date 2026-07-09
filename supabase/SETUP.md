@@ -8,7 +8,7 @@ The community board (Q&A, housing, marketplace) + admin-managed content (Announc
 3. Save the database password somewhere.
 
 ## 2. Apply the schema
-Run **every file in `supabase/migrations/` in filename order** (`0001_…`, `0002_…`, `0003_…`, `0004_…`, `0005_…`).
+Run **every file in `supabase/migrations/` in filename order** (`0001_…` through `0006_…`).
 Two options:
 - **SQL editor (easiest):** open the project's SQL editor, paste each migration file
   in order, and run it.
@@ -20,6 +20,7 @@ This creates:
 - Post **image** columns and the **`post-images`** Storage bucket + its access policies (`0003`; create it manually if your project blocks `insert into storage.buckets`).
 - **Moderation** (`0004`): `profiles.can_moderate_reports`, `profiles.notify_on_report`, `reports.status`, and new RLS policies so moderators can read/update reports and moderate content (close/delete posts/answers).
 - **Content Admin** (`0005`): tables for announcements, faqs, guidelines, safety_disclaimers, businesses with public read access and admin-only write access via RLS.
+- **Security hardening** (`0006`): a trigger that blocks non-admins from changing role columns on their own profile (RLS has no column-level control), http(s)-only checks on stored URL fields, and moderator read access to closed/removed reported posts.
 
 ## 3. Get your API keys
 Project → **Settings → API**. Copy:

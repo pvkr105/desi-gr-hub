@@ -15,7 +15,7 @@ export async function notifyReportFiled(opts: {
     const { data: mods } = await supabase
       .from("profiles")
       .select("id")
-      .or("(is_admin.eq.true,can_moderate_reports.eq.true)")
+      .or("is_admin.eq.true,can_moderate_reports.eq.true")
       .eq("notify_on_report", true)
       .limit(1);
 
