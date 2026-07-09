@@ -86,6 +86,7 @@ export default async function AdminPage() {
           {profiles.map((p) => (
             <li key={p.id} className="flex items-center gap-2 border-t border-line pt-2 text-sm">
               <span className="truncate">{p.display_name ?? "Anonymous"}</span>
+              {p.email && <span className="truncate text-xs text-muted">{p.email}</span>}
               {p.is_admin && (
                 <span className="shrink-0 rounded-full border border-line px-2 py-0.5 text-xs text-saffron">
                   admin

@@ -8,7 +8,7 @@ The community board (Q&A, housing, marketplace) + admin-managed content (Announc
 3. Save the database password somewhere.
 
 ## 2. Apply the schema
-Run **every file in `supabase/migrations/` in filename order** (`0001_…` through `0007_…`).
+Run **every file in `supabase/migrations/` in filename order** (`0001_…` through `0008_…`).
 Two options:
 - **SQL editor (easiest):** open the project's SQL editor, paste each migration file
   in order, and run it.
@@ -22,6 +22,7 @@ This creates:
 - **Content Admin** (`0005`): tables for announcements, faqs, guidelines, safety_disclaimers, businesses with public read access and admin-only write access via RLS.
 - **Security hardening** (`0006`): a trigger that blocks non-admins from changing role columns on their own profile (RLS has no column-level control), http(s)-only checks on stored URL fields, and moderator read access to closed/removed reported posts.
 - **Report limits + vote privacy** (`0007`): one report per user per target (unique constraint), max 20 reports/day/user, and votes readable only by their own voter.
+- **Admin user emails** (`0008`): admin-only SQL function so the `/admin` user list can show emails (returns nothing for non-admins).
 
 ## 3. Get your API keys
 Project → **Settings → API**. Copy:

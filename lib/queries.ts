@@ -191,16 +191,29 @@ export async function listOpenReports(): Promise<ReportGroup[]> {
   return result;
 }
 
-/** All signed-up users (profiles), newest first, with the total count. */
-export async function listProfiles(): Promise<{ count: number; profiles: Profile[] }> {
+export type ProfileWithEmail = Profile & { email: string | null };
+
+/** All signed-up users (profiles), newest first, with the total count.
+ *  Emails come from an admin-only SQL function — null for moderators. */
+export async function listProfiles(): Promise<{ count: number; profiles: ProfileWithEmail[] }> {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return { count: 0, profiles: [] };
   const supabase = await createClient();
-  const { data, count } = await supabase
-    .from("profiles")
-    .select("*", { count: "exact" })
-    .order("created_at", { ascending: false })
-    .limit(200);
-  return { count: count ?? 0, profiles: (data as Profile[]) ?? [] };
+  const [{ data, count }, { data: emails }] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select("*", { count: "exact" })
+      .order("created_at", { ascending: false })
+      .limit(200),
+    supabase.rpc("list_user_emails"),
+  ]);
+  const emailMap = new Map(
+    ((emails as { id: string; email: string }[]) ?? []).map((e) => [e.id, e.email]),
+  );
+  const profiles = ((data as Profile[]) ?? []).map((p) => ({
+    ...p,
+    email: emailMap.get(p.id) ?? null,
+  }));
+  return { count: count ?? 0, profiles };
 }
 
 /** All admins and moderators, admins first. */
