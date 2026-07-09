@@ -17,6 +17,7 @@ Most people meet Desi GR Hub through a link forwarded in WhatsApp, on their phon
 
 - **Group directory** with a detail page for each WhatsApp group: purpose, guidelines, a QR code, and share and join buttons.
 - **Community board** — a Reddit-style Q&A, housing and roommate listings, and a buy/sell marketplace. Members sign in with Google or email to post; listings expire on their own.
+- **Report moderation** — members can report posts/answers; moderators review them at `/admin`, with bulk actions to dismiss, close, or delete content. Admins can promote/demote team members at `/admin/team` and toggle email alerts when new reports arrive.
 - **Newcomer's Guide** covering groceries, temples, banking and SSN basics, and getting around.
 - **Events & meetups**, a live **currency converter** (USD↔INR and 200+ currencies), and a Grand Rapids **weather banner** for newcomers.
 - **Community business directory** of desi-owned businesses serving West Michigan.

@@ -51,8 +51,13 @@ export default async function AccountPage({
               <dd className="font-medium">{user.email}</dd>
             </div>
           )}
-          {user.profile?.is_admin && (
-            <p className="text-saffron">You have admin access to moderate the community board.</p>
+          {(user.profile?.is_admin || user.profile?.can_moderate_reports) && (
+            <p className="text-saffron">
+              You have {user.profile?.is_admin ? "admin" : "moderator"} access.{" "}
+              <Link href="/admin" className="underline underline-offset-2">
+                Go to moderation dashboard
+              </Link>
+            </p>
           )}
         </dl>
 

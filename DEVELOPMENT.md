@@ -14,10 +14,12 @@ All of the site's content lives in plain text files in `data/`. Edit the right f
 | Business directory listings | `data/businesses.ts` ⚠️ still has sample content to replace |
 | Guidelines / safety text | `data/guidelines.ts`, `data/safety.ts` |
 | Site address, main hub link, contact-form ID | `data/site.ts` |
+| Events (recurring or one-time) | Use the admin dashboard at `/events` (logged in as admin); no code needed |
+| Newcomer's Guide entries | Use the admin dashboard at `/newcomers` (logged in as admin); no code needed |
 
 Each file has short comments explaining what to fill in. Content is typed by `lib/types.ts`, so a wrong shape shows up as an error at build time.
 
-**Not in these files:** the **community board** (Q&A, housing, marketplace) is user-generated and lives in the Supabase database, not `data/`. You moderate it from the board itself (delete/close as an admin) — see the community board section below. The **weather banner** and **currency converter** pull live data from free public APIs, so there's nothing to edit for them either.
+**Not in these files:** the **community board** (Q&A, housing, marketplace) is user-generated and lives in the Supabase database, not `data/`. Moderators review reported posts at `/admin` with bulk actions (dismiss/close/delete); admins can promote/demote team members at `/admin/team` and toggle email alerts — see the moderation section below. The **weather banner** and **currency converter** pull live data from free public APIs, so there's nothing to edit for them either.
 
 ## Before you go live
 
@@ -29,9 +31,12 @@ Each file has short comments explaining what to fill in. Content is typed by `li
 
 The board is the one part of the site that needs a backend. It runs on **Supabase's free tier** (database + sign-in) and still deploys free on Vercel. The rest of the site works with or without it.
 
-- **To turn it on:** follow **[supabase/SETUP.md](./supabase/SETUP.md)** — create a free Supabase project, run the migrations, enable Google + email sign-in, and paste three keys into `.env.local` (locally) and Vercel's env settings (in production). ~15 minutes.
+- **To turn it on:** follow **[supabase/SETUP.md](./supabase/SETUP.md)** — create a free Supabase project, run the migrations (including `0004_admin_moderation.sql` for the new moderation features), enable Google + email sign-in, and paste three keys into `.env.local` (locally) and Vercel's env settings (in production). ~15 minutes.
 - **Until you do,** the site still builds and every static page works; the board simply shows sign-in / empty states.
-- **Moderating:** make yourself an admin (one SQL line in `supabase/SETUP.md`), then you can delete or close any post and see reported items. As an admin you also **add/edit/delete Events and Newcomer's Guide entries directly on `/events` and `/newcomers`** — no code needed.
+- **Moderating:** make yourself an admin (one SQL line in `supabase/SETUP.md`). Then:
+  - **Review reports at `/admin`:** members can report posts/answers; you see them grouped by target (post/answer) with report count and reasons. Bulk actions: dismiss reports, close posts (set `status='closed'`), or delete content. Toggle "Email me on new report" to get Formspree alerts when members file reports.
+  - **Manage the team at `/admin/team`** (admin-only): promote other members by email with granular permissions — Full Admin (all privileges) or Moderator (can review reports and moderate content, but cannot manage the team or site admin functions).
+  - **Manage Events & Newcomer's Guide:** add/edit/delete entries directly on `/events` and `/newcomers` — no code needed.
 - **Posts** can include up to 4 photos (compressed in the browser before upload) and are **editable for 24 hours**, after which the author deletes and reposts. Housing/marketplace listings auto-expire after the duration the poster chose (7–60 days).
 - **Cost note:** Vercel's free tier is **non-commercial** — keep the board free and ad-free, or upgrade to Vercel Pro.
 
@@ -71,8 +76,8 @@ npm run lint
 ### Architecture
 - Static content in typed `data/` files (typed by `lib/types.ts`); pages in `app/`, shared UI in `components/`.
 - Server Components by default; `"use client"` only where browser APIs are needed: mobile menu, copy-link button, contact form, the weather/currency live islands, and a few board components (`AuthButtons`, forms).
-- Marketing pages are statically generated (group detail pages use `generateStaticParams`; QR codes render to SVG at build time). The board (`/community/*`, `/account`) is server-rendered on demand.
-- **Community board:** Supabase Auth (Google OAuth + email magic link); **Row-Level Security** is the authorization layer (policies in `supabase/migrations/0001_init.sql`); mutations via **server actions** (`app/community/actions.ts`, each re-checks auth); session refreshed in **`proxy.ts`**. Data reads in `lib/queries.ts`, board constants in `lib/community.ts`, Supabase clients in `lib/supabase/`.
+- Marketing pages are statically generated (group detail pages use `generateStaticParams`; QR codes render to SVG at build time). The board (`/community/*`, `/account`), admin pages (`/admin`, `/admin/team`), and events/newcomers management are server-rendered on demand.
+- **Community board & moderation:** Supabase Auth (Google OAuth + email magic link); **Row-Level Security** is the authorization layer (policies in `supabase/migrations/0001_init.sql` + extended by `0004_admin_moderation.sql` for moderator roles); mutations via **server actions** (`app/community/actions.ts`, `app/admin-actions.ts`, each re-checks auth); session refreshed in **`proxy.ts`**. Data reads in `lib/queries.ts`, board constants in `lib/community.ts`, Supabase clients in `lib/supabase/`. Email notifications sent best-effort via `lib/notify.ts` (Formspree integration).
 - SEO: per-page metadata + JSON-LD (Organization + WebSite on home, FAQPage on `/faq`, Event on `/events`, BreadcrumbList on group pages, **QAPage on question detail pages**), `sitemap.ts` (appends question URLs), `robots.ts`, generated `opengraph-image`. Board listings (housing/marketplace) are `noindex`.
 - **Next 16 gotchas:** route `params`/`searchParams` are Promises (`await` them); **middleware is now `proxy.ts`**; `cookies()` is async; Tailwind's gradient utility is `bg-linear-to-*`.
 

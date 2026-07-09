@@ -14,6 +14,7 @@ import {
   isPostType,
 } from "@/lib/community";
 import type { PostType, TargetKind } from "@/lib/types";
+import { notifyReportFiled } from "@/lib/notify";
 
 // Every action re-checks auth on the server — Server Actions are reachable via
 // direct POST, and RLS is the second line of defense (Next 16 data-security note).
@@ -215,6 +216,9 @@ export async function reportContent(formData: FormData) {
 
   await supabase.from("reports").insert({ reporter_id: user.id, target_type, target_id, reason });
   revalidatePath(str(formData, "path") || "/community");
+
+  // Best-effort notification to admins/moderators (swallows errors).
+  await notifyReportFiled({ targetType: target_type, targetId: target_id, reason });
 }
 
 // useActionState wrapper so the Report button can show "Reported ✓" feedback.

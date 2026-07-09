@@ -76,6 +76,8 @@ export interface Profile {
   display_name: string | null;
   avatar_url: string | null;
   is_admin: boolean;
+  can_moderate_reports: boolean;
+  notify_on_report: boolean;
 }
 
 export interface Post {
@@ -140,6 +142,25 @@ export interface Answer {
   score: number;
   created_at: string;
   author?: Profile | null;
+}
+
+export interface Report {
+  id: string;
+  target_type: TargetKind;
+  target_id: string;
+  reporter_id: string;
+  reason: string | null;
+  status: "open" | "resolved";
+  created_at: string;
+}
+
+export interface ReportGroup {
+  target_type: TargetKind;
+  target_id: string;
+  count: number;
+  reasons: string[];
+  latest_at: string;
+  target: Post | Answer | null;
 }
 
 export type BusinessCategory =

@@ -9,18 +9,17 @@ Google OAuth. Everything else is already in the repo. ~15 minutes, all free tier
 3. Save the database password somewhere.
 
 ## 2. Apply the schema
-Run **every file in `supabase/migrations/` in filename order** (`0001_…`, `0002_…`, `0003_…`).
+Run **every file in `supabase/migrations/` in filename order** (`0001_…`, `0002_…`, `0003_…`, `0004_…`).
 Two options:
 - **SQL editor (easiest):** open the project's SQL editor, paste each migration file
   in order, and run it.
 - **CLI:** `npx supabase link --project-ref <ref>` then `npx supabase db push` (applies all).
 
-This creates the tables, RLS policies, and triggers (auto-profile on signup,
-post + answer rate-limits, vote scoring), the **events** and **newcomer guide** tables
-(admin-managed in-site), the post **image** columns, and the **`post-images`** Storage
-bucket + its access policies (`0003` creates the bucket via SQL — no manual step needed;
-if your project blocks `insert into storage.buckets`, create a public bucket named
-`post-images` in the dashboard **Storage** tab instead, then re-run the policy statements).
+This creates:
+- Tables, RLS policies, and triggers: auto-profile on signup, post + answer rate-limits, vote scoring.
+- **Events** and **newcomer guide** tables (admin-managed in-site via `/events` and `/newcomers`).
+- Post **image** columns and the **`post-images`** Storage bucket + its access policies (`0003`; create it manually if your project blocks `insert into storage.buckets`).
+- **Moderation** (`0004`): `profiles.can_moderate_reports`, `profiles.notify_on_report`, `reports.status`, and new RLS policies so moderators can read/update reports and moderate content (close/delete posts/answers).
 
 ## 3. Get your API keys
 Project → **Settings → API**. Copy:
@@ -50,14 +49,18 @@ npm run dev
 ```
 Go to `/community`, sign in via `/account`, and post.
 
-## 6. Make yourself an admin (for moderation)
+## 6. Bootstrap the first admin (for moderation)
 After signing in once, in the Supabase **SQL editor**:
 ```sql
 update profiles set is_admin = true where id = (
   select id from auth.users where email = 'you@example.com'
 );
 ```
-Admins can delete/close any post and read reports.
+**Full admin** (`is_admin = true`): can delete/close any post, read/dismiss reports, and manage the team at `/admin/team` (promote/demote other admins/moderators by email).
+
+Once you're admin, use `/admin/team` to promote other users as **Moderators** (`can_moderate_reports = true`): they can review reports at `/admin` and close/delete reported content, but cannot manage the team or other site admin functions.
+
+Both roles see the moderation queue at `/admin`, can toggle email alerts for new reports, and have a direct link from `/account`.
 
 ## 7. Deploy to Vercel
 - Add the same three env vars in **Vercel → Project → Settings → Environment Variables**.

@@ -8,6 +8,8 @@ import type {
   Post,
   PostType,
   Profile,
+  Report,
+  ReportGroup,
 } from "@/lib/types";
 
 const AUTHOR = "author:profiles(id,display_name,avatar_url,is_admin)";
@@ -117,4 +119,82 @@ export async function listQuestionIdsForSitemap(): Promise<{ id: string; created
     .order("created_at", { ascending: false })
     .limit(1000);
   return (data as { id: string; created_at: string }[]) ?? [];
+}
+
+/** Open reports, grouped by target (post/answer), newest first. */
+export async function listOpenReports(): Promise<ReportGroup[]> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("reports")
+    .select("*")
+    .eq("status", "open")
+    .order("created_at", { ascending: false })
+    .limit(300);
+
+  if (!data?.length) return [];
+
+  const reports = (data as Report[]) ?? [];
+
+  // Group by target_type:target_id; collect reasons, count, latest timestamp.
+  const grouped = new Map<string, { reports: Report[]; reasons: Set<string> }>();
+  for (const r of reports) {
+    const key = `${r.target_type}:${r.target_id}`;
+    if (!grouped.has(key)) {
+      grouped.set(key, { reports: [], reasons: new Set() });
+    }
+    const g = grouped.get(key)!;
+    g.reports.push(r);
+    if (r.reason) g.reasons.add(r.reason);
+  }
+
+  // Batch-fetch the referenced posts/answers.
+  const postIds = Array.from(new Set(
+    reports.filter(r => r.target_type === "post").map(r => r.target_id)
+  ));
+  const answerIds = Array.from(new Set(
+    reports.filter(r => r.target_type === "answer").map(r => r.target_id)
+  ));
+
+  const [postsData, answersData] = await Promise.all([
+    postIds.length > 0
+      ? supabase.from("posts").select(`*, ${AUTHOR}`).in("id", postIds)
+      : Promise.resolve({ data: [] }),
+    answerIds.length > 0
+      ? supabase.from("answers").select(`*, ${AUTHOR}`).in("id", answerIds)
+      : Promise.resolve({ data: [] }),
+  ]);
+
+  const postsMap = new Map((postsData.data as Post[])?.map(p => [p.id, p]) ?? []);
+  const answersMap = new Map((answersData.data as Answer[])?.map(a => [a.id, a]) ?? []);
+
+  // Build ReportGroup entries.
+  const result: ReportGroup[] = [];
+  for (const [key, { reports: rs, reasons }] of grouped) {
+    const [type, id] = key.split(":") as [any, string];
+    const target = type === "post" ? postsMap.get(id) ?? null : answersMap.get(id) ?? null;
+    result.push({
+      target_type: type,
+      target_id: id,
+      count: rs.length,
+      reasons: Array.from(reasons),
+      latest_at: rs[0]!.created_at,
+      target,
+    });
+  }
+
+  return result;
+}
+
+/** All admins and moderators, admins first. */
+export async function listModerators(): Promise<Profile[]> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("profiles")
+    .select("*")
+    .or("is_admin.eq.true,can_moderate_reports.eq.true")
+    .order("is_admin", { ascending: false })
+    .order("display_name", { ascending: true });
+  return (data as Profile[]) ?? [];
 }

@@ -23,15 +23,18 @@ The public website for **Desi GR Hub**, a WhatsApp community for Indian & South 
 - Marketing pages are statically generated. QR codes render to SVG **at build time** in the `QrCode` server component (`qrcode` package). Contact form is a plain HTML POST to **Formspree** (no backend).
 - **Two live client islands** fetch free, **keyless** public APIs in the browser — the HTML stays static, only the numbers hydrate: `WeatherBanner` (Open-Meteo) and the currency `ForexIndicator` / `CurrencyConverter` (fawazahmed0 rates, via `lib/rates.ts`).
 - **Community board** (`/community/*`, `/account`) is the dynamic tier: **Supabase** Postgres + Auth (Google OAuth + email magic link). **Row-Level Security is the authorization layer**; mutations go through **server actions** (`app/community/actions.ts`); the session cookie is refreshed in **`proxy.ts`**. Schema + policies live in `supabase/migrations/`. Setup: `supabase/SETUP.md`.
-- **Posts** support **image uploads** (≤4, compressed in-browser via `lib/image.ts` → the `post-images` Storage bucket; URLs allow-listed server-side) and a **24h edit window** (`canEdit` in `lib/community.ts`, `editPost` action); a **disclaimer modal** gates posting. **Events** + the **Newcomer's Guide** are admin-managed in-site via `app/admin-actions.ts` (gated by `is_admin`), rendered by `EventAdmin` / `NewcomerAdmin`.
+- **Posts** support **image uploads** (≤4, compressed in-browser via `lib/image.ts` → the `post-images` Storage bucket; URLs allow-listed server-side) and a **24h edit window** (`canEdit` in `lib/community.ts`, `editPost` action); a **disclaimer modal** gates posting. When a post/answer is reported, it goes into the **moderation queue** viewable at `/admin` (gated by `is_admin` or `can_moderate_reports`).
+- **Events** + the **Newcomer's Guide** are admin-managed in-site via `app/admin-actions.ts` (gated by `is_admin`), rendered by `EventAdmin` / `NewcomerAdmin`.
+- **Admin dashboard** (`/admin`, `/admin/team`) lets moderators review reported content and bulk-moderate (dismiss/close/delete), and full admins manage team permissions. Admins can toggle email notifications (one shared inbox via Formspree when any moderator has it on). Team management (`/admin/team`, admin-only) lets you promote/demote users by email with per-user `is_admin` and `can_moderate_reports` toggles.
 
 ```
 app/            static info pages + sitemap.ts, robots.ts, opengraph-image.tsx, not-found.tsx, error.tsx, goodbye/
   community/    board: landing, [type] list, [type]/[id] detail (+ /edit), new, loading.tsx, actions.ts   ← DB-backed
   events/, newcomers/  ← DB-backed, admin CRUD (ISR)
+  admin/        moderation dashboard, team management (reports + moderators)   ← DB-backed, moderator/admin
   account/      sign-in / profile
   auth/callback/ OAuth + magic-link code exchange (route handler)
-  admin-actions.ts  admin-only server actions (events + newcomer CRUD)
+  admin-actions.ts  admin/moderator server actions (events, newcomers, reports, team)
 components/      Header, Footer, StickyJoinBar, JoinButton, GroupCard, BusinessCard, QrCode, LogoMark,
                 CopyLinkButton, PageHeader, JsonLd, WeatherBanner, ForexIndicator, CurrencyConverter, AuthNav,
                 ContributeBanner, SignedOutOnly, EventAdmin, NewcomerAdmin
@@ -39,7 +42,8 @@ components/      Header, Footer, StickyJoinBar, JoinButton, GroupCard, BusinessC
 data/           groups, faqs, announcements, guidelines, safety, businesses, site  ← edit these
                 (events, newcomers remain only as DB seed/reference)
 lib/            types.ts (all interfaces), rates.ts (FX fetch), community.ts (board constants + edit window/images),
-                image.ts (browser compress), queries.ts (Supabase reads), supabase/{client,server,proxy-session}.ts
+                image.ts (browser compress), queries.ts (Supabase reads), notify.ts (Formspree email on report),
+                supabase/{client,server,proxy-session}.ts
 proxy.ts        Supabase session refresh (Next 16's renamed middleware)
 supabase/       migrations/ (schema + RLS + triggers + storage bucket; apply all in order), SETUP.md
 ```
@@ -52,7 +56,9 @@ supabase/       migrations/ (schema + RLS + triggers + storage bucket; apply all
 - **Business listing:** add a `Business` to `data/businesses.ts` (admin-curated; requests arrive via the contact form).
 - **Global settings** (site URL, main hub link, Formspree ID): `data/site.ts`.
 - **Weather / currency:** no data file — they're code-only client islands fetching live APIs. Tune the currency source in `lib/rates.ts`, board constants (categories, expiry) in `lib/community.ts`.
-- **Community board content is user-generated in Supabase**, *not* `data/*.ts`. Admins moderate via the board UI (delete/close) or the DB; make a user an admin by setting `profiles.is_admin = true` (see `supabase/SETUP.md`).
+- **Community board content is user-generated in Supabase**, *not* `data/*.ts`. Moderators and admins review reported posts/answers at `/admin` (see Admin Dashboard below). Bulk actions: dismiss reports, close posts (set `status='closed'`), or delete content. Admins can toggle email notifications (one per-user toggle gates a shared Formspree inbox) and promote/demote other users by email at `/admin/team`. Set `profiles.is_admin = true` for full admins or `profiles.can_moderate_reports = true` for moderators-only (see `supabase/SETUP.md` bootstrap).
+- **Admin dashboard** (`/admin`): moderators see open reports grouped by target (post/answer), with reason(s) and live count per target. Checkboxes select targets; three bulk-action buttons (Dismiss Reports, Close Posts, Delete Content). Checking "Email me on new report" toggles `notify_on_report`; if any mod/admin has it on, Formspree gets a notification in the shared contact inbox when a report files.
+- **Team management** (`/admin/team`, admin-only): promote users by email (they must have signed in once). Per-user checkboxes: Full Admin (all privileges), Moderator (reports + close/delete reported content only). Prevent self-edit to avoid accidental lockout.
 
 ## Conventions & guardrails
 - Server Components by default; add `"use client"` only when you truly need browser APIs.
@@ -71,4 +77,4 @@ supabase/       migrations/ (schema + RLS + triggers + storage bucket; apply all
 - Community board needs env: copy `.env.example` → `.env.local` and fill the Supabase keys (`supabase/SETUP.md`). Without them the site still builds and all static pages work; the board just shows sign-in/empty states (fetches are env-guarded).
 
 ## Roadmap
-The v2 community board (Q&A + housing + marketplace) is **built** — Supabase-backed, additive to the static site (see `supabase/SETUP.md` to provision it). The original guardrail still holds: keep the static marketing pages independent of the database. Future ideas: in-app notifications, saved searches, richer moderation tooling.
+The v2 community board (Q&A + housing + marketplace) is **built** — Supabase-backed, additive to the static site (see `supabase/SETUP.md` to provision it). v4 adds **admin moderation**: reports queue at `/admin`, email alerts, and team management at `/admin/team` to promote/demote moderators by email. The original guardrail still holds: keep the static marketing pages independent of the database. Future ideas: in-app notifications, saved searches, richer moderation tooling (report comments, etc.).
