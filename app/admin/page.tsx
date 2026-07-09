@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getCurrentUser, listOpenReports } from "@/lib/queries";
+import { getCurrentUser, listOpenReports, listProfiles } from "@/lib/queries";
 import { timeAgo } from "@/lib/community";
 import { PageHeader } from "@/components/PageHeader";
 import { moderateReports, updateNotifyPreference } from "@/app/admin-actions";
@@ -33,7 +33,10 @@ export default async function AdminPage() {
     );
   }
 
-  const reports = await listOpenReports();
+  const [reports, { count: userCount, profiles }] = await Promise.all([
+    listOpenReports(),
+    listProfiles(),
+  ]);
 
   return (
     <>
@@ -68,6 +71,41 @@ export default async function AdminPage() {
           </Link>
         </div>
       )}
+
+      {/* Users: count + collapsible list, newest first */}
+      <details className="glass mb-6 rounded-2xl p-5">
+        <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 text-sm font-medium">
+          <span>
+            Users: <span className="text-saffron">{userCount}</span> signed up
+          </span>
+          <span aria-hidden="true" className="text-saffron">
+            +
+          </span>
+        </summary>
+        <ul className="mt-3 space-y-2">
+          {profiles.map((p) => (
+            <li key={p.id} className="flex items-center gap-2 border-t border-line pt-2 text-sm">
+              <span className="truncate">{p.display_name ?? "Anonymous"}</span>
+              {p.is_admin && (
+                <span className="shrink-0 rounded-full border border-line px-2 py-0.5 text-xs text-saffron">
+                  admin
+                </span>
+              )}
+              {!p.is_admin && p.can_moderate_reports && (
+                <span className="shrink-0 rounded-full border border-line px-2 py-0.5 text-xs text-muted">
+                  moderator
+                </span>
+              )}
+              <span className="ml-auto shrink-0 text-xs text-muted">
+                joined {timeAgo(p.created_at)}
+              </span>
+            </li>
+          ))}
+          {userCount > profiles.length && (
+            <li className="pt-2 text-xs text-muted">…and {userCount - profiles.length} more</li>
+          )}
+        </ul>
+      </details>
 
       {/* Reports list */}
       {reports.length === 0 ? (

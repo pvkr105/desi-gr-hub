@@ -191,6 +191,18 @@ export async function listOpenReports(): Promise<ReportGroup[]> {
   return result;
 }
 
+/** All signed-up users (profiles), newest first, with the total count. */
+export async function listProfiles(): Promise<{ count: number; profiles: Profile[] }> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return { count: 0, profiles: [] };
+  const supabase = await createClient();
+  const { data, count } = await supabase
+    .from("profiles")
+    .select("*", { count: "exact" })
+    .order("created_at", { ascending: false })
+    .limit(200);
+  return { count: count ?? 0, profiles: (data as Profile[]) ?? [] };
+}
+
 /** All admins and moderators, admins first. */
 export async function listModerators(): Promise<Profile[]> {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];

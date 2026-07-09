@@ -78,6 +78,7 @@ export interface Profile {
   is_admin: boolean;
   can_moderate_reports: boolean;
   notify_on_report: boolean;
+  created_at: string;
 }
 
 export interface Post {

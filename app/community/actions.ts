@@ -214,7 +214,13 @@ export async function reportContent(formData: FormData) {
   const reason = str(formData, "reason") || null;
   if (!target_id) throw new Error("Nothing to report");
 
-  await supabase.from("reports").insert({ reporter_id: user.id, target_type, target_id, reason });
+  const { error } = await supabase
+    .from("reports")
+    .insert({ reporter_id: user.id, target_type, target_id, reason });
+  // Already reported by this user (unique constraint, 0007): treat as done,
+  // and never email on a failed insert.
+  if (error?.code === "23505") return;
+  if (error) throw new Error(error.message);
   revalidatePath(str(formData, "path") || "/community");
 
   // Best-effort notification to admins/moderators (swallows errors).
