@@ -55,7 +55,7 @@ export function AuthNav({ onNavigate }: { onNavigate?: () => void } = {}) {
       <span className="text-sm text-muted">
         Hi, <span className="font-semibold text-ink">{name}</span>
       </span>
-      <form action={signOut}>
+      <form action={signOut} onSubmit={onNavigate}>
         <button
           type="submit"
           className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-sm font-medium text-muted hover:border-saffron hover:text-ink"
