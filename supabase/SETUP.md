@@ -8,21 +8,17 @@ The community board (Q&A, housing, marketplace) + admin-managed content (Announc
 3. Save the database password somewhere.
 
 ## 2. Apply the schema
-Run **every file in `supabase/migrations/` in filename order** (`0001_…` through `0008_…`).
-Two options:
-- **SQL editor (easiest):** open the project's SQL editor, paste each migration file
-  in order, and run it.
-- **CLI:** `npx supabase link --project-ref <ref>` then `npx supabase db push` (applies all).
+The whole schema is **one file**: `supabase/migrations/0001_schema.sql`. Run it once:
+- **SQL editor (easiest):** open the project's SQL editor, paste the file, run it.
+- **CLI:** `npx supabase link --project-ref <ref>` then `npx supabase db push`.
 
-This creates:
-- Tables, RLS policies, and triggers: auto-profile on signup, post + answer rate-limits, vote scoring.
-- **Events**, **Newcomer's Guide**, **Announcements**, **FAQs**, **Guidelines**, **Safety Disclaimers**, **Businesses** tables (all admin-managed in-site via their respective pages).
-- Post **image** columns and the **`post-images`** Storage bucket + its access policies (`0003`; create it manually if your project blocks `insert into storage.buckets`).
-- **Moderation** (`0004`): `profiles.can_moderate_reports`, `profiles.notify_on_report`, `reports.status`, and new RLS policies so moderators can read/update reports and moderate content (close/delete posts/answers).
-- **Content Admin** (`0005`): tables for announcements, faqs, guidelines, safety_disclaimers, businesses with public read access and admin-only write access via RLS.
-- **Security hardening** (`0006`): a trigger that blocks non-admins from changing role columns on their own profile (RLS has no column-level control), http(s)-only checks on stored URL fields, and moderator read access to closed/removed reported posts.
-- **Report limits + vote privacy** (`0007`): one report per user per target (unique constraint), max 20 reports/day/user, and votes readable only by their own voter.
-- **Admin user emails** (`0008`): admin-only SQL function so the `/admin` user list can show emails (returns nothing for non-admins).
+This creates everything:
+- **Community board**: posts, answers, votes, reports — with RLS, rate limits (10 posts / 30 answers / 20 reports per day per user), vote-score triggers, one-report-per-user-per-target, and auto-profile on signup.
+- **Admin-managed content**: events, newcomer guide, announcements, FAQs, guidelines, safety disclaimers, businesses — public read, admin-only write, seeded with starter content you edit in-site.
+- **Moderation & roles**: `is_admin` / `can_moderate_reports` flags, report queue policies, and a trigger that blocks non-admins from changing role columns (RLS has no column-level control).
+- **Storage**: the `post-images` bucket + access policies (create the bucket manually if your project blocks `insert into storage.buckets`).
+
+(The schema evolved as incremental migrations `0001`–`0008` during development; see git history if you need the step-by-step record.)
 
 ## 3. Get your API keys
 Project → **Settings → API**. Copy:

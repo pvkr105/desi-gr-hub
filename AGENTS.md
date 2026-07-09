@@ -46,7 +46,7 @@ lib/            types.ts (all interfaces), rates.ts (FX fetch), community.ts (bo
                 image.ts (browser compress), queries.ts (Supabase reads), notify.ts (Formspree email on report),
                 supabase/{client,server,proxy-session}.ts
 proxy.ts        Supabase session refresh (Next 16's renamed middleware)
-supabase/       migrations/ (schema + RLS + triggers + storage bucket; apply all in order), SETUP.md
+supabase/       migrations/0001_schema.sql (single file: schema + RLS + triggers + storage bucket + seeds), SETUP.md
 ```
 
 ## Content-editing recipes
