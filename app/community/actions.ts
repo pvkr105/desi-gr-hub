@@ -245,6 +245,8 @@ export async function deletePost(formData: FormData) {
 
 export async function signOut() {
   const supabase = await createClient();
-  await supabase.auth.signOut();
+  await supabase.auth.signOut({ scope: "local" });
+  revalidatePath("/account");
+  revalidatePath("/");
   redirect("/goodbye");
 }
