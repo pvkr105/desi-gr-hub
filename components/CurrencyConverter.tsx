@@ -36,14 +36,19 @@ export function CurrencyConverter() {
   const [to, setTo] = useState("inr");
 
   useEffect(() => {
-    fetchRates("usd").then((r) => {
-      if (r) {
-        setRates({ usd: 1, ...r.rates });
-        setDate(r.date);
-      } else {
-        setFailed(true);
-      }
-    });
+    const load = () => {
+      fetchRates("usd").then((r) => {
+        if (r) {
+          setRates({ usd: 1, ...r.rates });
+          setDate(r.date);
+        } else {
+          setFailed(true);
+        }
+      });
+    };
+    load();
+    const interval = setInterval(load, 24 * 60 * 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const codes = useMemo(() => (rates ? Object.keys(rates).sort() : []), [rates]);

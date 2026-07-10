@@ -11,12 +11,17 @@ export function ForexIndicator() {
   const [date, setDate] = useState<string>("");
 
   useEffect(() => {
-    fetchRates("usd").then((r) => {
-      if (r?.rates.inr) {
-        setInr(r.rates.inr);
-        setDate(r.date);
-      }
-    });
+    const load = () => {
+      fetchRates("usd").then((r) => {
+        if (r?.rates.inr) {
+          setInr(r.rates.inr);
+          setDate(r.date);
+        }
+      });
+    };
+    load();
+    const interval = setInterval(load, 24 * 60 * 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
 
   if (!inr) return null;
