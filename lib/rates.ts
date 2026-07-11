@@ -12,7 +12,9 @@ export type Rates = { date: string; base: string; rates: Record<string, number> 
 export async function fetchRates(base = "usd"): Promise<Rates | null> {
   for (const url of [PRIMARY(base), FALLBACK(base)]) {
     try {
-      const res = await fetch(url);
+      // no-store: skip the browser cache so a returning visitor gets today's
+      // rates, not yesterday's cached copy.
+      const res = await fetch(url, { cache: "no-store" });
       if (!res.ok) continue;
       const data = await res.json();
       const rates = data?.[base];
